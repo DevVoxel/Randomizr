@@ -1,0 +1,138 @@
+<!--
+    Aiden T. Smith
+    home.html
+    2/21/21
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/slideshow.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <a href="home.html">
+          <img
+            src="https://img.pngio.com/items-similar-to-letter-r-logo-vector-eps-png-jpg-clipart-editable-cuttable-printable-on-etsy-r-png-570_570.jpg"
+            alt="R Logo"
+            id="rlogo"
+          />
+        </a>
+        <nav class="navbar">
+          <strong>
+            <ul class="navlist">
+              <li><a href="home.html">Home</a></li>
+              <li><a href="random.html">Random</a></li>
+              <li><a href="og/index.html" target="_blank">Original</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </strong>
+        </nav>
+      </header>
+      <h1>Welcome to the home page</h1>
+      <div class="slideshow-container">
+        <div class="slides fade">
+          <div class="numbertext">1 of 3</div>
+          <img src="img/random.png" />
+          <div class="text">Welcome to the Radomiser Website</div>
+        </div>
+
+        <div class="slides fade">
+          <div class="numbertext">2 of 3</div>
+          <img src="img/bluegreensdice.png" />
+          <div class="text">
+            Our service will offer you free and open RNG Source Code. This can
+            be used for services such as
+            <a href="https://roll20.net/">Roll20.net </a>
+          </div>
+        </div>
+
+        <div class="slides fade">
+          <div class="numbertext">3 of 3</div>
+          <img src="img/random-numbers-dice.jpg" />
+          <div class="text">
+            You can use auto generated lists, or make your own for
+            randomisation!
+          </div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+      <div class="genInfo">
+        <p id="intro">
+          Welcome to the remake of randomiser.com! In order to view the original
+          page<a href="og/index.html" target="_blank">click here!</a>or read
+          about it in the about tab. Within this website you will be able to
+          randomise almost anything with our Javascript! We will have premade
+          lists available to you, as well as the option to create your own list!
+          Currently this is a very basic version of our completed website, but
+          the idea will be represented on our<a href="random.html">Random</a
+          >page. Within this page you will be given the opportunity to use our
+          pre-made lists to go through, or input your own. e also have
+          implemented a random number generator offered by
+          <a href="https://www.random.org/">Random.org!</a>
+        </p>
+      </div>
+
+      <footer>
+        <div class="footTxt">
+          <h4>
+            Please use our<a href="contact.html" style="color: white"
+              >Contact Us</a
+            >page to give us feedback!
+          </h4>
+        </div>
+        <div class="social">
+          <a href="https://www.instagram.com/" target="_blank"
+            ><img
+              src="https://freeiconshop.com/wp-content/uploads/edd/instagram-new-flat.png"
+          /></a>
+          <a href="https://twitter.com/home" target="_blank"
+            ><img
+              src="https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/256/Twitter_NEW.png"
+          /></a>
+          <a href="https://github.com/" target="_blank"
+            ><img
+              src="https://camo.githubusercontent.com/f116befea219e410bfd127754d966c015c2562f776874928efae907452155a1d/68747470733a2f2f7777772e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f6f637469636f6e732f313032342f6d61726b2d6769746875622d3235362e706e67"
+          /></a>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript">
+      alert("Welcome to the Randomizer website!");
+
+      var slideIndex = 1;
+      showSlides(slideIndex);
+
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
+
+      function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("slides");
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!--
+    Aiden T. Smith
+    random.html
+    2/21/21
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Random</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/list.css" type="text/css">
+</head>
+<body>
+    <div id="wrapper">
+    <header>
+        <a href="home.html">
+            <img src="https://img.pngio.com/items-similar-to-letter-r-logo-vector-eps-png-jpg-clipart-editable-cuttable-printable-on-etsy-r-png-570_570.jpg" alt="R Logo" id="rlogo">
+        </a>
+        <nav class="navbar">
+            <strong>
+                <a href="home.html">Home</a>
+                <a href="random.html">Random</a>
+                <a href="og/index.html" target="_blank">Original</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+            </strong>
+        </nav>
+    </header>
+    <section>
+        <div class="randomapi">
+            <iframe src="https://www.random.org/widgets/integers/iframe.php?title=True+Random+Number+Generator&amp;buttontxt=Generate&amp;width=160&amp;height=200&amp;border=on&amp;bgcolor=%23FFFFFF&amp;txtcolor=%23777777&amp;altbgcolor=%23CCCCFF&amp;alttxtcolor=%23000000&amp;defaultmin=&amp;defaultmax=&amp;fixed=off" frameborder="0" width="160" height="200" scrolling="no" longdesc="https://www.random.org/integers/">
+            </iframe>
+         </div>
+    </section>
+
+    <div id="divList" class="header">
+        <h2>My List</h2>
+        <input type="text" id="myInput" placeholder="Content...">
+        <span onclick="newElement()" class="addBtn">Add</span>
+        <ul id="auto">
+        </ul>
+        <button onclick="ranSelect()" class="customBtn addBtn">Random Item (Currently Scuffed)</button>
+    </div>
+    <p id="intro">If you want to check out more services like ours, check out <a href="https://www.textfixer.com/tools/random-choice.php">Text Fixer</a>! They give great tools for developers, and if you just need a random list generated!</p>
+    <footer>
+        <div class="footTxt">
+          <h4>Please use our<a href="contact.html" style="color: white;">Contact Us</a>page to give us feedback!</h4>
+        </div>
+        <div class="social">
+            <a href="https://www.instagram.com/" target="_blank"><img src="https://freeiconshop.com/wp-content/uploads/edd/instagram-new-flat.png"></a>
+            <a href="https://twitter.com/home" target="_blank"><img src="https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/256/Twitter_NEW.png"></a>
+            <a href="https://github.com/" target="_blank"><img src="https://camo.githubusercontent.com/f116befea219e410bfd127754d966c015c2562f776874928efae907452155a1d/68747470733a2f2f7777772e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f6f637469636f6e732f313032342f6d61726b2d6769746875622d3235362e706e67"></a>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        var myNodelist = document.getElementsByTagName("LI");
+        var i;
+        for (i = 0; i < myNodelist.length; i++) {
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            myNodelist[i].appendChild(span);
+        }
+
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+
+        function newElement() {
+        var li = document.createElement("li");
+        var inputValue = document.getElementById("myInput").value;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+            alert("You must write something!");
+        } else {
+            document.getElementById("auto").appendChild(li);
+        }
+        document.getElementById("myInput").value = "";
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+                var div = this.parentElement;
+                div.style.display = "none";
+                }
+            }
+        }
+        function ranSelect() {
+                var auto = document.getElementById("auto");
+                var autoLi = auto.getElementsByTagName("li");
+                var selectedNumber = Math.floor((Math.random() * autoLi.length - 1) + 1);
+                var selectedList = autoLi[selectedNumber];
+
+                for (var i = autoLi.length - 1; i >= 0; i--) {
+                    autoLi[i].setAttribute("style", "font-weight: normal;color: black;");
+                }
+
+                selectedList.setAttribute("style", "font-weight: bold;color: red;");
+                document.getElementById('selectedTitle').innerHTML = selectedList.innerHTML;
+        }
+    </script>
+</body> 
+</html>

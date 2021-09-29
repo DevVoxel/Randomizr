@@ -1,0 +1,146 @@
+* {
+    box-sizing:border-box
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+/* Still working on fixing the slideshow */
+@media only screen and (max-width: 1024px) {
+    body {
+        margin: 0;
+    }
+    #wrapper {
+        width: auto;
+    }
+    header {
+        height:auto; line-height: auto;
+    }
+    nav { 
+        width: auto; height: auto;
+    }
+    .navlist {
+        float: none;
+        display: inline-block; 
+        padding: 0;
+        margin: 0;
+    }
+    .navbar {
+        text-align: center;
+    }
+    nav a {
+        border-style: none;
+    }
+    h1, h2 {
+        font-size: 120%;
+    }
+    p {
+        font-size: 90%;
+        } 
+}
+
+body {
+    font-family: Arial; 
+}
+
+#wrapper {
+    border: 2px solid #000;
+}
+
+#rlogo {
+    max-width: 80px;
+    max-height: 80px;
+    padding: 10px;
+}
+
+.navbar {
+    text-decoration: none;
+    text-align: center;
+    float: right;
+    padding-right: 100px;
+    padding-top: 30px;
+
+}
+
+a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+    padding: 5px;
+    font-size: 16px;
+}
+
+#about {
+    align-content: center;
+    text-align: justify;
+    max-width: 40%;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin: auto;
+    align-content: center;
+    padding: 30px;
+}
+
+#intro {
+    max-width: 600px;
+    max-height: 700px;
+    text-align: justify;
+    position: relative;
+    margin: auto;
+    margin-bottom: auto;
+    padding: 20px;
+    padding-bottom: 50px;
+    font-family: arial;
+    font-weight: 800;
+}
+
+.social img {
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+}
+
+.social {
+    position: relative;
+    text-align: center;
+}
+
+footer {
+    background-color: rgb(37, 37, 37);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    max-height: 50px;
+    width: 100%;
+}
+
+.footTxt {
+    position:  fixed;
+    left: 20px;
+}
+
+.randomapi {
+    text-align: center;
+}
+
+.navlist {
+    list-style: : none;
+    text-align: center;
+    float: left;
+}
+
+.navlist li {
+    padding-right:20px;
+    font-size:20px;
+    padding-top:10px;
+    float:left;
+    display:inline;
+}
