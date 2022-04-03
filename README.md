@@ -1,2 +1,2 @@
 # Randomizr
-Website that allows users to ranodmize listed items.
+Website that allows users to randomize listed items.
