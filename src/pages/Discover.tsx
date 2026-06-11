@@ -114,14 +114,14 @@ export default function Discover() {
                   src={card.image}
                   alt={card.title}
                   loading="lazy"
-                  className="w-full max-h-[420px] object-contain bg-muted grayscale contrast-110 border-b-2 border-foreground"
+                  className="w-full max-h-[420px] object-contain bg-muted border-b-2 border-foreground"
                 />
               )}
               {card.embedUrl && (
                 <iframe
                   src={card.embedUrl}
                   title="Map of the random location"
-                  className="w-full h-80 border-b-2 border-foreground grayscale contrast-110"
+                  className="w-full h-80 border-b-2 border-foreground"
                   loading="lazy"
                 />
               )}
