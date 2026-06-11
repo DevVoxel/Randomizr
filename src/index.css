@@ -1,56 +1,53 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
-:root {
-  --radius: 0.75rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+/* BPdots Bold — the original 2010 theRandomizr brand font */
+@font-face {
+  font-family: 'bpdotsbold';
+  src:
+    url('/fonts/BPdotsBold-webfont.woff') format('woff'),
+    url('/fonts/BPdotsBold-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+/*
+ * Monochrome, like the 2010 original: ink on warm paper.
+ * Emphasis is inversion (paper-on-ink), never color.
+ */
+:root {
+  --radius: 0rem;
+  --paper: oklch(0.967 0.005 90);
+  --ink: oklch(0.215 0.012 75);
+  --gray: oklch(0.45 0.012 75);
+  --faint: oklch(0.93 0.007 90);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--faint);
+  --secondary-foreground: var(--ink);
+  --muted: var(--faint);
+  --muted-foreground: var(--gray);
+  --accent: var(--faint);
+  --accent-foreground: var(--ink);
+  --destructive: var(--ink);
+  --border: var(--ink);
+  --input: var(--ink);
+  --ring: var(--ink);
 }
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -69,13 +66,104 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', 'Source Code Pro', monospace;
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  html {
+    color-scheme: light;
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: auto; /* mono reads crisper unsmoothed on paper */
+    min-height: 100svh;
+  }
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-brand {
+    font-family: 'bpdotsbold', var(--font-mono);
+    font-weight: normal;
+  }
+  /* solid 2px frame — the basic surface of the whole site */
+  .ink-card {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+  }
+  .hard-shadow {
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .hard-shadow-sm {
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  /* halftone dot field, echoing the gray dot grids of the 2010 site */
+  .halftone {
+    background-image: radial-gradient(circle, var(--ink) 1.2px, transparent 1.3px);
+    background-size: 10px 10px;
+  }
+  .halftone-faint {
+    background-image: radial-gradient(circle, oklch(0.215 0.012 75 / 22%) 1.2px, transparent 1.3px);
+    background-size: 10px 10px;
+  }
+  /* primary action: solid ink, presses down into its own shadow */
+  .btn-ink {
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 80ms ease, box-shadow 80ms ease;
+  }
+  .btn-ink:hover:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .btn-ink:active:not(:disabled) {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+  .btn-ink:disabled {
+    opacity: 0.45;
+  }
+  /* secondary action: outlined */
+  .btn-paper {
+    background: var(--paper);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    transition: background 100ms ease, color 100ms ease;
+  }
+  .btn-paper:hover:not(:disabled) {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-paper:disabled {
+    opacity: 0.45;
+  }
+  .num-input {
+    width: 100%;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 0.4rem 0.65rem;
+    color: var(--ink);
+    font-family: var(--font-mono);
+  }
+  .num-input::placeholder {
+    color: var(--gray);
+    opacity: 0.7;
   }
 }
