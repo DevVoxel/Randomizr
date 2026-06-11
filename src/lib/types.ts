@@ -40,6 +40,7 @@ export type MethodId =
   | 'number'
   | 'coin'
   | 'eightball'
+  | 'wiki'
   | 'timeline'
 
 export interface MethodDef {
@@ -169,6 +170,13 @@ export const METHODS: MethodDef[] = [
     name: 'Magic 8-Ball',
     tagline: 'ask it anything',
     description: 'Twenty stock answers, one shaken sphere. No list required, just a question you were going to answer yourself anyway.',
+    minItems: 0,
+  },
+  {
+    id: 'wiki',
+    name: 'Wikipedia Roulette',
+    tagline: 'infinite list',
+    description: 'Spins the largest list humanity has. A random article, a random person, or a random moment in history, live from Wikipedia.',
     minItems: 0,
   },
   {

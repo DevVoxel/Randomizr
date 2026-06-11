@@ -20,6 +20,7 @@ import Bottle from '../components/methods/Bottle'
 import Balloons from '../components/methods/Balloons'
 import Marbles from '../components/methods/Marbles'
 import EightBall from '../components/methods/EightBall'
+import Wiki from '../components/methods/Wiki'
 import Dice from '../components/methods/Dice'
 import NumberGen from '../components/methods/NumberGen'
 import Coin from '../components/methods/Coin'
@@ -183,6 +184,7 @@ function Stage({
     case 'number': return <NumberGen onResult={onLabel} />
     case 'coin': return <Coin onResult={onLabel} />
     case 'eightball': return <EightBall onResult={onLabel} />
+    case 'wiki': return <Wiki onLabel={onLabel} />
     case 'timeline': return <Timeline items={items} onResult={onItem} />
   }
 }

@@ -15,9 +15,13 @@ Feed in data from any **source**, pick any **method**:
 | Saved lists (localStorage) | Short Straw · Eeny Meeny (Josephus) |
 | Share links (`?share=` a list, `?result=` a verdict) | Sort Race (8 algorithms, race or sort your list A-Z) |
 | Number ranges | Plinko (canvas physics, aim the drop) |
-| | Spin the Bottle · Balloon Pop · Marble Race |
+| Wikipedia (random article / person / on-this-day, live) | Spin the Bottle · Balloon Pop · Marble Race |
 | | Dice Roll · Number Generator · Coin Flip |
-| | Magic 8-Ball · Timeline Shuffle |
+| | Magic 8-Ball · Wikipedia Roulette · Timeline Shuffle |
+
+There is also **The Entropy Press** (`/learn`): short articles on how the
+randomness works, from `crypto.getRandomValues()` and rejection sampling to
+random.org's radios and Cloudflare's lava lamps.
 
 Results are recorded to a local history. Lists save to your browser — no account needed.
 Any list can be copied as a share link and opened on someone else's machine.

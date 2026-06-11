@@ -3,6 +3,8 @@ import { ItemsProvider } from './state/ItemsContext'
 import Home from './pages/Home'
 import Randomize from './pages/Randomize'
 import Lists from './pages/Lists'
+import Learn from './pages/Learn'
+import ArticlePage from './pages/ArticlePage'
 
 export default function App() {
   return (
@@ -15,6 +17,7 @@ export default function App() {
             </Link>
             <div className="flex items-center gap-3 sm:gap-5 text-xs uppercase tracking-[0.18em] whitespace-nowrap shrink-0">
               <NavTab to="/" end label="Methods" />
+              <NavTab to="/learn" label="Learn" />
               <NavTab to="/lists" label="Lists" />
             </div>
           </div>
@@ -24,6 +27,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/randomize/:method" element={<Randomize />} />
             <Route path="/lists" element={<Lists />} />
+            <Route path="/learn" element={<Learn />} />
+            <Route path="/learn/:slug" element={<ArticlePage />} />
           </Routes>
         </div>
         <footer className="border-t-2 border-foreground py-5 px-5">
@@ -40,7 +45,16 @@ export default function App() {
               </a>{' '}
               · rebuilt 2026
             </span>
-            <span>randomness: crypto.getRandomValues() · no take-backs</span>
+            <span>
+              randomness:{' '}
+              <Link
+                to="/learn/how-this-site-rolls"
+                className="underline underline-offset-2 decoration-dotted hover:text-foreground"
+              >
+                crypto.getRandomValues()
+              </Link>{' '}
+              · no take-backs
+            </span>
           </div>
         </footer>
       </div>

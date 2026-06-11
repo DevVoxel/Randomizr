@@ -1,7 +1,7 @@
 import {
   ArrowDownToDot, ArrowUpDown, CircleDot, Clapperboard, Clock, Coins, Dices,
   Flag, Hash, Layers, LoaderPinwheel, PartyPopper, Slash, Split, Target,
-  Trophy, Users, Wine,
+  Globe, Trophy, Users, Wine,
 } from 'lucide-react'
 import type { MethodId } from '../lib/types'
 
@@ -23,5 +23,6 @@ export const METHOD_ICONS: Record<MethodId, React.ReactNode> = {
   number: <Hash className="size-6" />,
   coin: <Coins className="size-6" />,
   eightball: <CircleDot className="size-6" />,
+  wiki: <Globe className="size-6" />,
   timeline: <Clock className="size-6" />,
 }
