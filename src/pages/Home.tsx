@@ -19,7 +19,7 @@ export default function Home() {
       <section className="grid lg:grid-cols-[1.4fr_1fr] gap-10 items-center pt-14 pb-16 border-b-2 border-foreground">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-6">
-            fifteen methods · est. 2010
+            {METHODS.length} methods · est. 2010
           </p>
           <h1 className="font-brand text-6xl sm:text-7xl md:text-8xl leading-[0.95]">
             Randomize
@@ -35,7 +35,7 @@ export default function Home() {
               Spin the wheel
             </Link>
             <a href="#methods" className="text-sm underline underline-offset-4 decoration-2 hover:decoration-dotted">
-              or browse all fifteen ↓
+              or browse all {METHODS.length} ↓
             </a>
           </div>
         </div>

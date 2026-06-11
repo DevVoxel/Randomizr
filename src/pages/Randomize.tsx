@@ -1,8 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import type { Item, MethodId } from '../lib/types'
 import { METHODS, getMethod } from '../lib/types'
-import { decodeShare } from '../lib/share'
+import { decodeShare, decodeResult, type SharedResult } from '../lib/share'
 import { useItems } from '../state/useItems'
 import SourcePanel from '../components/source/SourcePanel'
 import { HistoryPanel } from '../components/ResultBanner'
@@ -16,6 +16,9 @@ import Straws from '../components/methods/Straws'
 import Eeny from '../components/methods/Eeny'
 import SortRace from '../components/methods/SortRace'
 import Plinko from '../components/methods/Plinko'
+import Bottle from '../components/methods/Bottle'
+import Balloons from '../components/methods/Balloons'
+import Marbles from '../components/methods/Marbles'
 import EightBall from '../components/methods/EightBall'
 import Dice from '../components/methods/Dice'
 import NumberGen from '../components/methods/NumberGen'
@@ -27,17 +30,25 @@ export default function Randomize() {
   const method = getMethod(methodId)
   const { items, setItems, setSourceName, recordResult } = useItems()
   const [params, setParams] = useSearchParams()
+  // ?result= carries a single verdict; decoded once at mount, URL cleaned below
+  const [sharedResult] = useState<SharedResult | null>(() => {
+    const r = new URLSearchParams(window.location.search).get('result')
+    return r ? decodeResult(r) : null
+  })
 
-  // ?share= links carry a whole list; load it once and clean the URL
+  // ?share= carries a whole list; read once, then clean both params off the URL
   useEffect(() => {
     const share = params.get('share')
-    if (!share) return
-    const decoded = decodeShare(share)
-    if (decoded) {
-      setItems(decoded.items)
-      setSourceName(decoded.name)
+    if (!share && !params.get('result')) return
+    if (share) {
+      const decoded = decodeShare(share)
+      if (decoded) {
+        setItems(decoded.items)
+        setSourceName(decoded.name)
+      }
+      params.delete('share')
     }
-    params.delete('share')
+    params.delete('result')
     setParams(params, { replace: true })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -64,13 +75,30 @@ export default function Randomize() {
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-8">
-      {/* method switcher: a strip of numbered tabs */}
-      <div className="flex overflow-x-auto -mx-5 px-5 border-b-2 border-foreground">
+      {/* a verdict someone sent over */}
+      {sharedResult && (
+        <div className="mb-6 bg-foreground text-background px-5 py-4 hard-shadow flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-4 min-w-0">
+            {sharedResult.image && <img src={sharedResult.image} alt="" className="max-h-16 object-cover border-2 border-background" />}
+            <div className="min-w-0">
+              <div className="text-[10px] uppercase tracking-[0.3em] opacity-70">someone sent you a verdict</div>
+              <div className="font-brand text-2xl break-words">
+                {sharedResult.label}
+                {sharedResult.meta && <span className="ml-2 text-base opacity-70">({sharedResult.meta})</span>}
+              </div>
+            </div>
+          </div>
+          <span className="text-xs opacity-70">{method.name} called it. Run your own below.</span>
+        </div>
+      )}
+
+      {/* method switcher: wrapping chips, never a horizontal scroll */}
+      <div className="flex flex-wrap gap-1.5 pb-4 border-b-2 border-foreground">
         {METHODS.map((m, i) => (
           <Link
             key={m.id}
             to={`/randomize/${m.id}`}
-            className={`shrink-0 px-3 py-2 text-xs whitespace-nowrap border-r-2 border-foreground first:border-l-2 ${
+            className={`px-2.5 py-1.5 text-xs whitespace-nowrap border-2 border-foreground ${
               m.id === method.id
                 ? 'bg-foreground text-background font-semibold'
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted'
@@ -84,11 +112,20 @@ export default function Randomize() {
 
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 items-start">
         <aside className="flex flex-col gap-4 lg:sticky lg:top-20">
-          <SourcePanel />
+          <div>
+            <h2 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground mb-2">
+              Step 1 · Load a list
+            </h2>
+            <SourcePanel />
+          </div>
           <HistoryPanel />
         </aside>
 
-        <section className="ink-card hard-shadow min-h-[480px] flex flex-col">
+        <section>
+          <h2 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground mb-2">
+            Step 2 · Let chance decide
+          </h2>
+          <div className="ink-card hard-shadow min-h-[480px] flex flex-col">
           <header className="border-b-2 border-foreground px-6 py-4 flex items-baseline gap-4">
             <span className="font-brand text-3xl text-muted-foreground">{String(methodNo).padStart(2, '0')}</span>
             <div>
@@ -111,6 +148,7 @@ export default function Randomize() {
             ) : (
               <Stage methodId={method.id} items={items} onItem={record} onLabel={recordLabel} />
             )}
+          </div>
           </div>
         </section>
       </div>
@@ -135,9 +173,12 @@ function Stage({
     case 'teams': return <Teams items={items} onLabel={onLabel} />
     case 'straws': return <Straws items={items} onResult={onItem} />
     case 'eeny': return <Eeny items={items} onResult={onItem} />
-    case 'sortrace': return <SortRace items={items} onResult={onItem} />
-    // keyed so a list change rebuilds the board with fresh bins
+    case 'sortrace': return <SortRace items={items} onItem={onItem} onLabel={onLabel} />
+    // keyed so a list change rebuilds the board with fresh bins/seats
     case 'plinko': return <Plinko key={items.map((i) => i.id).join()} items={items} onResult={onItem} />
+    case 'bottle': return <Bottle key={items.map((i) => i.id).join()} items={items} onResult={onItem} />
+    case 'balloons': return <Balloons items={items} onResult={onItem} />
+    case 'marbles': return <Marbles items={items} onResult={onItem} />
     case 'dice': return <Dice items={items} onResult={onItem} />
     case 'number': return <NumberGen onResult={onLabel} />
     case 'coin': return <Coin onResult={onLabel} />

@@ -34,6 +34,9 @@ export type MethodId =
   | 'eeny'
   | 'sortrace'
   | 'plinko'
+  | 'bottle'
+  | 'balloons'
+  | 'marbles'
   | 'number'
   | 'coin'
   | 'eightball'
@@ -108,8 +111,8 @@ export const METHODS: MethodDef[] = [
   {
     id: 'sortrace',
     name: 'Sort Race',
-    tagline: 'algorithms, racing',
-    description: 'Your items get secret random ranks, then bubble, insertion, and selection sort race to put them in order. The nerdiest shuffle on the site.',
+    tagline: 'eight algorithms',
+    description: 'Race up to four of eight sorting algorithms over secret random ranks, or watch one alphabetize your actual list, operation by operation.',
     minItems: 3,
   },
   {
@@ -117,6 +120,27 @@ export const METHODS: MethodDef[] = [
     name: 'Plinko',
     tagline: 'aim, drop, pray',
     description: 'A board of ink pegs, a disc, and gravity. Aim the drop wherever you like. The bounces have other plans.',
+    minItems: 2,
+  },
+  {
+    id: 'bottle',
+    name: 'Spin the Bottle',
+    tagline: 'party classic',
+    description: 'Your items sit in a circle, the bottle spins in the middle. Wherever the neck points, that’s the one.',
+    minItems: 2,
+  },
+  {
+    id: 'balloons',
+    name: 'Balloon Pop',
+    tagline: 'pop till you drop',
+    description: 'A wall of balloons, one hiding the verdict. Pop your way through and enjoy the suspense.',
+    minItems: 3,
+  },
+  {
+    id: 'marbles',
+    name: 'Marble Race',
+    tagline: 'lane racing',
+    description: 'Every item gets a marble and a lane. They surge, they stall, one crosses the line first. Pure chaos, fully watchable.',
     minItems: 2,
   },
   {

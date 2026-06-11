@@ -1,5 +1,4 @@
 import { Routes, Route, Link, NavLink } from 'react-router-dom'
-import { DotR } from './components/Logo'
 import { ItemsProvider } from './state/ItemsContext'
 import Home from './pages/Home'
 import Randomize from './pages/Randomize'
@@ -11,9 +10,8 @@ export default function App() {
       <div className="min-h-svh flex flex-col">
         <nav className="sticky top-0 z-40 bg-background border-b-2 border-foreground">
           <div className="mx-auto max-w-6xl px-5 h-14 flex items-center justify-between gap-4">
-            <Link to="/" className="flex items-center gap-2.5 min-w-0">
-              <DotR className="h-7 w-auto text-foreground shrink-0" />
-              <span className="font-brand text-xl sm:text-2xl pt-0.5 truncate">theRandomizr</span>
+            <Link to="/" className="min-w-0">
+              <span className="font-brand text-xl sm:text-2xl pt-0.5 truncate block">theRandomizr</span>
             </Link>
             <div className="flex items-center gap-3 sm:gap-5 text-xs uppercase tracking-[0.18em] whitespace-nowrap shrink-0">
               <NavTab to="/" end label="Methods" />

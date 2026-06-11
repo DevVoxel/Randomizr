@@ -12,10 +12,10 @@ Feed in data from any **source**, pick any **method**:
 | Images (upload, drag-drop, or URL) | Ladder Lottery (amidakuji) |
 | Letterboxd (RSS by username, or CSV export) | Tournament (single elimination) |
 | Goodreads (shelf RSS) | Team Splitter |
-| Saved lists (localStorage) | Short Straw |
-| Share links (`?share=` — a whole list in a URL) | Eeny Meeny (counting-out / Josephus) |
-| Number ranges | Sort Race (bubble vs insertion vs selection) |
-| | Plinko (canvas physics, aim the drop) |
+| Saved lists (localStorage) | Short Straw · Eeny Meeny (Josephus) |
+| Share links (`?share=` a list, `?result=` a verdict) | Sort Race (8 algorithms, race or sort your list A-Z) |
+| Number ranges | Plinko (canvas physics, aim the drop) |
+| | Spin the Bottle · Balloon Pop · Marble Race |
 | | Dice Roll · Number Generator · Coin Flip |
 | | Magic 8-Ball · Timeline Shuffle |
 
@@ -62,8 +62,8 @@ Open http://localhost:5173.
 src/
   components/
     methods/       Wheel, Cards, Slots, Ladder, Bracket, Teams, Straws,
-                   Eeny, SortRace, Plinko, Dice, NumberGen, Coin,
-                   EightBall, Timeline
+                   Eeny, SortRace, Plinko, Bottle, Balloons, Marbles,
+                   Dice, NumberGen, Coin, EightBall, Timeline
     source/        SourcePanel (type / presets / images / sheet / watchlists / saved)
     Logo.tsx       dotted-R mark
   pages/           Home, Randomize (/randomize/:method), Lists

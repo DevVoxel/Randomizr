@@ -46,6 +46,31 @@ export function decodeShare(param: string): { items: Item[]; name: string } | nu
   }
 }
 
+export interface SharedResult {
+  label: string
+  meta?: string
+  image?: string
+}
+
+/** A single verdict travels as a ?result= param, same packing rules as lists. */
+export function encodeResult(result: SharedResult): string {
+  const packed: Packed = [result.label]
+  if (result.meta) packed[1] = result.meta
+  if (result.image && /^https?:/.test(result.image)) packed[2] = result.image
+  return bytesToB64(new TextEncoder().encode(JSON.stringify(packed)))
+}
+
+export function decodeResult(param: string): SharedResult | null {
+  try {
+    const t = JSON.parse(new TextDecoder().decode(b64ToBytes(param))) as Packed
+    const label = typeof t?.[0] === 'string' ? t[0].trim() : ''
+    if (!label) return null
+    return { label, meta: t[1] || undefined, image: t[2] || undefined }
+  } catch {
+    return null
+  }
+}
+
 function bytesToB64(bytes: Uint8Array): string {
   let bin = ''
   for (const b of bytes) bin += String.fromCharCode(b)

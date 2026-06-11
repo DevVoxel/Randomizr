@@ -1,9 +1,21 @@
+import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useItems } from '../state/useItems'
 import { getMethod } from '../lib/types'
+import { encodeResult } from '../lib/share'
 
 /** The verdict: an inverted ink block, stamped onto the page. */
 export function ResultBanner({ label, image, meta }: { label: string; image?: string; meta?: string }) {
+  const [copied, setCopied] = useState(false)
+
+  // the method lives in the URL path, so the link replays in the same arena
+  const share = async () => {
+    const code = encodeResult({ label, meta, image })
+    await navigator.clipboard.writeText(`${location.origin}${location.pathname}?result=${code}`)
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 2000)
+  }
+
   return (
     <AnimatePresence mode="popLayout">
       <motion.div
@@ -22,6 +34,12 @@ export function ResultBanner({ label, image, meta }: { label: string; image?: st
             {meta && <span className="ml-2 text-base opacity-70">({meta})</span>}
           </div>
         </div>
+        <button
+          onClick={share}
+          className="mt-2 text-[10px] uppercase tracking-[0.2em] opacity-70 hover:opacity-100 underline underline-offset-2"
+        >
+          {copied ? 'link copied' : 'share this verdict'}
+        </button>
       </motion.div>
     </AnimatePresence>
   )

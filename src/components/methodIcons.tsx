@@ -1,6 +1,7 @@
 import {
   ArrowDownToDot, ArrowUpDown, CircleDot, Clapperboard, Clock, Coins, Dices,
-  Hash, Layers, LoaderPinwheel, Slash, Split, Target, Trophy, Users,
+  Flag, Hash, Layers, LoaderPinwheel, PartyPopper, Slash, Split, Target,
+  Trophy, Users, Wine,
 } from 'lucide-react'
 import type { MethodId } from '../lib/types'
 
@@ -15,6 +16,9 @@ export const METHOD_ICONS: Record<MethodId, React.ReactNode> = {
   eeny: <Target className="size-6" />,
   sortrace: <ArrowUpDown className="size-6" />,
   plinko: <ArrowDownToDot className="size-6" />,
+  bottle: <Wine className="size-6" />,
+  balloons: <PartyPopper className="size-6" />,
+  marbles: <Flag className="size-6" />,
   dice: <Dices className="size-6" />,
   number: <Hash className="size-6" />,
   coin: <Coins className="size-6" />,
