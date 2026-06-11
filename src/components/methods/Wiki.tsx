@@ -3,6 +3,7 @@ import { Loader2 } from 'lucide-react'
 import { motion } from 'motion/react'
 import type { WikiCard } from '../../lib/wiki'
 import { randomArticle, randomPerson, randomOnThisDay } from '../../lib/wiki'
+import InkImage from '../InkImage'
 
 type Pull = 'article' | 'person' | 'onthisday'
 
@@ -62,11 +63,11 @@ export default function Wiki({ onLabel }: { onLabel: (label: string) => void }) 
           className="ink-card hard-shadow w-full"
         >
           {card.image && (
-            <img
+            <InkImage
               src={card.image}
               alt=""
-              className="w-full max-h-56 object-cover border-b-2 border-foreground"
-              loading="lazy"
+              wrapperClassName="border-b-2 border-foreground"
+              className="w-full max-h-56 object-cover"
             />
           )}
           <div className="p-5">

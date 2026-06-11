@@ -1,4 +1,5 @@
-import { Routes, Route, Link, NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, Link, NavLink, useLocation } from 'react-router-dom'
 import { ItemsProvider } from './state/ItemsContext'
 import Home from './pages/Home'
 import Randomize from './pages/Randomize'
@@ -8,9 +9,23 @@ import ArticlePage from './pages/ArticlePage'
 import Discover from './pages/Discover'
 import ApiPage from './pages/ApiPage'
 
+/** SPA navigation keeps scroll position by default; readers expect the top of the page. */
+function ScrollToTop() {
+  const { pathname, hash } = useLocation()
+  useEffect(() => {
+    if (hash) {
+      document.querySelector(hash)?.scrollIntoView()
+      return
+    }
+    window.scrollTo(0, 0)
+  }, [pathname, hash])
+  return null
+}
+
 export default function App() {
   return (
     <ItemsProvider>
+      <ScrollToTop />
       <div className="min-h-svh flex flex-col">
         <nav className="sticky top-0 z-40 bg-background border-b-2 border-foreground">
           <div className="mx-auto max-w-6xl px-5 h-14 flex items-center justify-between gap-4">

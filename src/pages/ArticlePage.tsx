@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { ARTICLES, getArticle } from '../lib/articles'
+import InkImage from '../components/InkImage'
 
 export default function ArticlePage() {
   const { slug } = useParams()
@@ -54,11 +55,11 @@ export default function ArticlePage() {
               case 'img':
                 return (
                   <figure key={i} className="my-2">
-                    <img
+                    <InkImage
                       src={b.src}
                       alt={b.alt}
-                      loading="lazy"
-                      className="w-full border-2 border-foreground hard-shadow-sm"
+                      wrapperClassName="border-2 border-foreground hard-shadow-sm"
+                      className="w-full"
                     />
                     <figcaption className="mt-2 text-xs text-muted-foreground">{b.caption}</figcaption>
                   </figure>

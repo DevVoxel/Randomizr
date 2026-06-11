@@ -4,6 +4,24 @@ import { motion } from 'motion/react'
 import type { Channel, DiscoverCard } from '../lib/discover'
 import { CHANNELS } from '../lib/discover'
 import { useItems } from '../state/useItems'
+import InkImage from '../components/InkImage'
+
+/* the map iframe gets the same dotted patience as images */
+function InkFrame({ src }: { src: string }) {
+  const [loaded, setLoaded] = useState(false)
+  return (
+    <div className="relative border-b-2 border-foreground">
+      {!loaded && <div className="absolute inset-0 halftone-faint animate-dots" aria-hidden />}
+      <iframe
+        src={src}
+        title="Map of the random location"
+        loading="lazy"
+        onLoad={() => setLoaded(true)}
+        className={`w-full h-80 transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+      />
+    </div>
+  )
+}
 
 export default function Discover() {
   const { recordResult } = useItems()
@@ -110,21 +128,14 @@ export default function Discover() {
               className="ink-card hard-shadow overflow-hidden"
             >
               {card.image && (
-                <img
+                <InkImage
                   src={card.image}
                   alt={card.title}
-                  loading="lazy"
-                  className="w-full max-h-[420px] object-contain bg-muted border-b-2 border-foreground"
+                  wrapperClassName="border-b-2 border-foreground bg-muted"
+                  className="w-full max-h-[420px] object-contain"
                 />
               )}
-              {card.embedUrl && (
-                <iframe
-                  src={card.embedUrl}
-                  title="Map of the random location"
-                  className="w-full h-80 border-b-2 border-foreground"
-                  loading="lazy"
-                />
-              )}
+              {card.embedUrl && <InkFrame src={card.embedUrl} />}
               <div className="p-6">
                 <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-1.5">{card.kicker}</p>
                 <h2 className="font-brand text-3xl leading-none break-words">{card.title}</h2>
