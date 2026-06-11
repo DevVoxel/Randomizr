@@ -15,7 +15,7 @@ const SOURCES: [string, string][] = [
 export default function Home() {
   return (
     <main className="mx-auto max-w-6xl px-5 pb-24">
-      {/* hero — set like a poster, not a SaaS pitch */}
+      {/* hero: set like a poster, not a SaaS pitch */}
       <section className="grid lg:grid-cols-[1.4fr_1fr] gap-10 items-center pt-14 pb-16 border-b-2 border-foreground">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-6">
@@ -28,7 +28,7 @@ export default function Home() {
           </h1>
           <p className="mt-6 max-w-md text-sm leading-relaxed">
             A wheel, a deck, six dice, a ladder, and zero opinions. Paste a list
-            — movies, dinners, chores, coworkers — and stop arguing about it.
+            (movies, dinners, chores, coworkers) and stop arguing about it.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <Link to="/randomize/wheel" className="btn-ink inline-block px-7 py-3 font-semibold">
@@ -39,13 +39,13 @@ export default function Home() {
             </a>
           </div>
         </div>
-        {/* the dotted R, oversized, on a halftone field — the 2010 grids again */}
+        {/* the dotted R, oversized, on a halftone field: the 2010 grids again */}
         <div className="hidden lg:flex justify-center halftone-faint py-10" aria-hidden>
           <DotR className="h-64 w-auto text-foreground" />
         </div>
       </section>
 
-      {/* methods — a printed program listing, not a card grid */}
+      {/* methods: a printed program listing, not a card grid */}
       <section id="methods" className="pt-12">
         <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground mb-5">
           The methods
@@ -71,7 +71,7 @@ export default function Home() {
         </ol>
       </section>
 
-      {/* sources — a spec sheet */}
+      {/* sources: a spec sheet */}
       <section className="grid md:grid-cols-2 gap-10 pt-16">
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground mb-5">

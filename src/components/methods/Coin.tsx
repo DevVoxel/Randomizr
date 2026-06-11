@@ -52,7 +52,7 @@ export default function Coin({ onResult }: { onResult: (label: string) => void }
           animate={{ rotateX: rotation }}
           transition={{ duration: 1.9, ease: [0.2, 0.7, 0.2, 1] }}
         >
-          {/* heads is ink, tails is paper — the two sides of the same press */}
+          {/* heads is ink, tails is paper: two sides of the same press */}
           <CoinFace label={heads || 'Heads'} className="bg-foreground text-background" />
           <CoinFace label={tails || 'Tails'} className="bg-background text-foreground" flipped />
         </motion.div>

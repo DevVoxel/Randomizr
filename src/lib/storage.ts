@@ -17,7 +17,7 @@ function write(key: string, value: unknown) {
   try {
     localStorage.setItem(key, JSON.stringify(value))
   } catch {
-    // storage full or unavailable — data stays in-memory only
+    // storage full or unavailable - data stays in-memory only
   }
 }
 
@@ -28,7 +28,7 @@ export function loadLists(): SavedList[] {
 export function saveList(name: string, items: Item[], id?: string): SavedList {
   const lists = loadLists()
   const now = Date.now()
-  // images as data URLs blow past localStorage quotas — strip them on save
+  // images as data URLs blow past localStorage quotas - strip them on save
   const slim = items.map(({ image, ...rest }) =>
     image && image.startsWith('data:') ? rest : { ...rest, image },
   )

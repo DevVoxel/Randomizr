@@ -73,7 +73,7 @@ export default function Eeny({ items, onResult }: { items: Item[]; onResult: (it
     <div className="flex flex-col items-center gap-6 w-full">
       {items.length > MAX_ITEMS && (
         <p className="text-xs text-muted-foreground">
-          The circle fits {MAX_ITEMS} — each round counts {MAX_ITEMS} of your {items.length} items.
+          The circle fits {MAX_ITEMS}, so each round counts {MAX_ITEMS} of your {items.length} items.
         </p>
       )}
 

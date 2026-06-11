@@ -4,7 +4,7 @@ import { makeItem } from './types'
 /**
  * Lists travel between people as a ?share= URL param: UTF-8-safe base64 of
  * [label, meta?] tuples. Data-URL images are dropped (megabytes), http image
- * URLs are kept. Encoding fails past ~6 KB — URLs have practical limits.
+ * URLs are kept. Encoding fails past ~6 KB - URLs have practical limits.
  */
 const MAX_ENCODED = 6_000
 

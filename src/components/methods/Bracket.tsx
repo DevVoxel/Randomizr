@@ -59,7 +59,7 @@ export default function Bracket({ items, onResult }: { items: Item[]; onResult: 
     <div className="flex flex-col items-center gap-6 w-full">
       {items.length > MAX_SEEDS && (
         <p className="text-xs text-muted-foreground">
-          Bracket caps at {MAX_SEEDS} — each run seeds {MAX_SEEDS} random entrants from your {items.length}.
+          Bracket caps at {MAX_SEEDS}, so each run seeds {MAX_SEEDS} random entrants from your {items.length}.
         </p>
       )}
 

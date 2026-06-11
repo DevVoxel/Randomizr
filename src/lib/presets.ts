@@ -41,7 +41,7 @@ export const PRESETS: Preset[] = [
     id: 'names',
     name: 'Name Picker',
     emoji: '🙋',
-    description: 'Sample names — replace with your crew',
+    description: 'Sample names. Replace with your crew',
     items: [
       'Alex', 'Sam', 'Jordan', 'Taylor', 'Casey', 'Riley', 'Morgan', 'Avery',
       'Quinn', 'Charlie', 'Dakota', 'Emerson', 'Finley', 'Hayden', 'Jamie', 'Kendall',
@@ -110,7 +110,7 @@ export const PRESETS: Preset[] = [
       'Cook a new cuisine together', 'Sunset walk + ice cream', 'Trivia night',
       'Pottery or paint class', 'Stargazing drive', 'Thrift store challenge',
       'Build a blanket fort + movie', 'Try the new place in town',
-      'Couples massage', 'Bookstore date — pick for each other',
+      'Couples massage', 'Bookstore date: pick for each other',
       'Mini road trip, no map', 'Game night, loser does dishes',
       'Fancy dessert, sweatpants dress code', 'Climbing gym',
       'Make pasta from scratch', 'Photo walk: 10 shots each',

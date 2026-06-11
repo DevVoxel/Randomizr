@@ -64,7 +64,7 @@ export default function Randomize() {
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-8">
-      {/* method switcher — a strip of numbered tabs */}
+      {/* method switcher: a strip of numbered tabs */}
       <div className="flex overflow-x-auto -mx-5 px-5 border-b-2 border-foreground">
         {METHODS.map((m, i) => (
           <Link
@@ -105,7 +105,7 @@ export default function Randomize() {
                   This one needs at least {method.minItems} items.
                 </p>
                 <p className="text-sm text-muted-foreground mt-2">
-                  Type a list, grab a preset, drop a spreadsheet, or pull a watchlist — left panel.
+                  Type a list, grab a preset, drop a spreadsheet, or pull a watchlist in the left panel.
                 </p>
               </div>
             ) : (

@@ -40,7 +40,7 @@ export default function Straws({ items, onResult }: { items: Item[]; onResult: (
     <div className="flex flex-col items-center gap-6 w-full">
       {items.length > MAX_STRAWS && (
         <p className="text-xs text-muted-foreground">
-          The fist holds {MAX_STRAWS} straws — each round draws {MAX_STRAWS} of your {items.length} items.
+          The fist holds {MAX_STRAWS} straws, so each round draws {MAX_STRAWS} of your {items.length} items.
         </p>
       )}
 
@@ -67,7 +67,7 @@ export default function Straws({ items, onResult }: { items: Item[]; onResult: (
               )
             })}
           </div>
-          {/* the fist — straws disappear into it until pulled */}
+          {/* the fist: straws disappear into it until pulled */}
           <div className="h-9 w-full bg-foreground relative -mt-1 halftone" style={{ backgroundImage: 'radial-gradient(circle, var(--paper) 1.2px, transparent 1.3px)', backgroundSize: '8px 8px', backgroundColor: 'var(--ink)' }} />
           <ol className="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1 text-xs w-full max-w-md">
             {round.order.map((item, i) => (

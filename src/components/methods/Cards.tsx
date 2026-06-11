@@ -57,7 +57,7 @@ export default function Cards({ items, onResult }: { items: Item[]; onResult: (i
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                 transition={{ duration: 0.6 }}
               >
-                {/* back — ink, with the dotted R as the card pattern */}
+                {/* back: ink, with the dotted R as the card pattern */}
                 <div
                   className="absolute inset-0 bg-foreground border-2 border-foreground grid place-items-center"
                   style={{ backfaceVisibility: 'hidden' }}

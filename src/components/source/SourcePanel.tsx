@@ -118,7 +118,7 @@ function PresetsTab() {
         >
           <div className="font-semibold text-sm">{p.name}</div>
           <div className="text-xs text-muted-foreground mt-0.5">
-            ×{p.items.length} — {p.description}
+            ×{p.items.length} · {p.description}
           </div>
         </button>
       ))}
@@ -182,7 +182,7 @@ function ImagesTab() {
         </button>
       </div>
       <p className="text-xs text-muted-foreground">
-        Images stay in your browser — nothing is uploaded anywhere.
+        Images stay in your browser. Nothing is uploaded anywhere.
       </p>
     </div>
   )
@@ -393,7 +393,7 @@ function ServicesTab() {
             {loading === 'gr' ? <Loader2 className="size-4 animate-spin" /> : 'Fetch'}
           </button>
         </div>
-        <p className="text-xs text-muted-foreground">Shelf RSS — works while your profile is public.</p>
+        <p className="text-xs text-muted-foreground">Shelf RSS. Works while your profile is public.</p>
       </section>
 
       {error && <p className="text-xs font-semibold underline decoration-wavy">{error}</p>}

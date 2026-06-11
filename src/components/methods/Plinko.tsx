@@ -34,7 +34,7 @@ interface Ball { x: number; y: number; vx: number; vy: number; landed: number | 
 
 export default function Plinko({ items, onResult }: { items: Item[]; onResult: (item: Item) => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  // bins are fixed for this mount — Randomize remounts Plinko when the list changes
+  // bins are fixed for this mount; Randomize remounts Plinko when the list changes
   const [bins] = useState<Item[]>(() =>
     items.length > MAX_BINS ? shuffle(items).slice(0, MAX_BINS) : [...items],
   )
@@ -179,7 +179,7 @@ export default function Plinko({ items, onResult }: { items: Item[]; onResult: (
     <div className="flex flex-col items-center gap-5 w-full">
       <p className="text-xs text-muted-foreground">
         Aim with your pointer, tap to drop.
-        {items.length > MAX_BINS && ` Board holds ${MAX_BINS} bins — sampled from your ${items.length}.`}
+        {items.length > MAX_BINS && ` Board holds ${MAX_BINS} bins, sampled from your ${items.length}.`}
       </p>
 
       <canvas
@@ -189,7 +189,7 @@ export default function Plinko({ items, onResult }: { items: Item[]; onResult: (
         onPointerMove={aim}
         onPointerDown={(e) => { aim(e); drop() }}
         className="border-2 border-foreground hard-shadow w-full max-w-sm touch-none cursor-crosshair select-none"
-        aria-label="Plinko board — tap to drop the disc"
+        aria-label="Plinko board. Tap to drop the disc"
       />
 
       <ol className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-1 text-xs w-full max-w-md">

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* BPdots Bold — the original 2010 theRandomizr brand font */
+/* BPdots Bold - the original 2010 theRandomizr brand font */
 @font-face {
   font-family: 'bpdotsbold';
   src:
@@ -101,7 +101,7 @@
     font-family: 'bpdotsbold', var(--font-mono);
     font-weight: normal;
   }
-  /* solid 2px frame — the basic surface of the whole site */
+  /* solid 2px frame - the basic surface of the whole site */
   .ink-card {
     background: var(--paper);
     border: 2px solid var(--ink);

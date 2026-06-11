@@ -74,7 +74,7 @@ export async function fetchSheetCsv(url: string): Promise<string> {
   if (!res.ok) {
     throw new Error(
       res.status === 401 || res.status === 403 || res.status === 404
-        ? 'Sheet is private — set sharing to "Anyone with the link"'
+        ? 'Sheet is private. Set sharing to "Anyone with the link"'
         : `Sheet fetch failed (HTTP ${res.status})`,
     )
   }

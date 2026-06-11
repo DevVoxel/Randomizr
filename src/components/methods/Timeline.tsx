@@ -18,7 +18,7 @@ export default function Timeline({ items, onResult }: { items: Item[]; onResult:
   return (
     <div className="flex flex-col items-center gap-6 w-full max-w-xl">
       <p className="text-sm text-muted-foreground text-center">
-        One Fisher–Yates pass over the whole list. Turn order, rankings, backlog triage.
+        One Fisher-Yates pass over the whole list. Turn order, rankings, backlog triage.
       </p>
       <button onClick={run} className="btn-ink inline-flex items-center gap-2 px-8 py-3 font-semibold text-lg">
         <Shuffle className="size-5" />

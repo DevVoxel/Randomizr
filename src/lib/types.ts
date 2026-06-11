@@ -95,7 +95,7 @@ export const METHODS: MethodDef[] = [
     id: 'straws',
     name: 'Short Straw',
     tagline: 'pull one',
-    description: 'A fist of straws, one cut short. Pull any straw to open the hand — whoever holds the short one takes the verdict.',
+    description: 'A fist of straws, one cut short. Pull any straw to open the hand. Whoever holds the short one takes the verdict.',
     minItems: 2,
   },
   {
@@ -116,7 +116,7 @@ export const METHODS: MethodDef[] = [
     id: 'plinko',
     name: 'Plinko',
     tagline: 'aim, drop, pray',
-    description: 'A board of ink pegs, a disc, and gravity. Aim the drop wherever you like — the bounces have other plans.',
+    description: 'A board of ink pegs, a disc, and gravity. Aim the drop wherever you like. The bounces have other plans.',
     minItems: 2,
   },
   {
@@ -130,7 +130,7 @@ export const METHODS: MethodDef[] = [
     id: 'number',
     name: 'Number Generator',
     tagline: 'raw RNG',
-    description: 'Numbers in any range, with or without repeats. Rejection-sampled — no modulo bias.',
+    description: 'Numbers in any range, with or without repeats. Rejection-sampled, no modulo bias.',
     minItems: 0,
   },
   {
@@ -144,7 +144,7 @@ export const METHODS: MethodDef[] = [
     id: 'eightball',
     name: 'Magic 8-Ball',
     tagline: 'ask it anything',
-    description: 'Twenty stock answers, one shaken sphere. No list required — just a question you were going to answer yourself anyway.',
+    description: 'Twenty stock answers, one shaken sphere. No list required, just a question you were going to answer yourself anyway.',
     minItems: 0,
   },
   {

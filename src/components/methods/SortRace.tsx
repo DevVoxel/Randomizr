@@ -7,7 +7,7 @@ import { ResultBanner } from '../ResultBanner'
 const MAX_ITEMS = 12
 const FRAME_MS = 90
 
-/* each algorithm yields a snapshot after every mutation — the race is real operation counts */
+/* each algorithm yields a snapshot after every mutation; the race is real operation counts */
 
 function bubbleFrames(start: number[]): number[][] {
   const a = [...start]
@@ -112,7 +112,7 @@ export default function SortRace({ items, onResult }: { items: Item[]; onResult:
     <div className="flex flex-col items-center gap-6 w-full">
       {items.length > MAX_ITEMS && (
         <p className="text-xs text-muted-foreground">
-          The track fits {MAX_ITEMS} — each race seeds {MAX_ITEMS} of your {items.length} items.
+          The track fits {MAX_ITEMS}, so each race seeds {MAX_ITEMS} of your {items.length} items.
         </p>
       )}
 

@@ -13,7 +13,7 @@ export async function fetchLetterboxdRss(username: string): Promise<Item[]> {
   if (!/^[\w-]+$/.test(user)) throw new Error('Invalid username')
   const xml = await fetchViaProxy(`https://letterboxd.com/${user}/rss/`)
   const items = parseRss(xml)
-  if (!items.length) throw new Error('Feed empty — diary may be private or unused')
+  if (!items.length) throw new Error('Feed empty. Diary may be private or unused')
   return items
 }
 
@@ -40,7 +40,7 @@ export function parseLetterboxdCsv(text: string): Item[] {
   const nameIdx = header.indexOf('name')
   const yearIdx = header.indexOf('year')
   if (nameIdx === -1) {
-    // not a letterboxd export — treat first column as titles
+    // not a letterboxd export - treat first column as titles
     return rows.flatMap((r) => (r[0]?.trim() ? [makeItem(r[0])] : []))
   }
   return rows.slice(1).flatMap((r) => {

@@ -88,7 +88,7 @@ export default function Ladder({ items, onResult }: { items: Item[]; onResult: (
     <div className="flex flex-col items-center gap-6 w-full">
       {items.length > MAX_COLS && (
         <p className="text-xs text-muted-foreground">
-          Ladders hold {MAX_COLS} rails — each run draws {MAX_COLS} of your {items.length} items.
+          Ladders hold {MAX_COLS} rails, so each run draws {MAX_COLS} of your {items.length} items.
         </p>
       )}
 
