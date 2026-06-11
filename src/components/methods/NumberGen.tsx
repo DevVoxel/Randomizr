@@ -67,7 +67,7 @@ export default function NumberGen({ onResult }: { onResult: (label: string) => v
               initial={rolling ? false : { scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: rolling ? 0 : i * 0.06, type: 'spring', stiffness: 300, damping: 18 }}
-              className={`min-w-16 px-4 py-2 text-center font-brand text-4xl tabular-nums border-2 ${
+              className={`min-w-16 px-4 py-3 text-center font-brand text-4xl tabular-nums leading-[0.7] border-2 ${
                 rolling ? 'border-dashed border-muted-foreground text-muted-foreground' : 'border-foreground bg-foreground text-background hard-shadow-sm'
               }`}
             >

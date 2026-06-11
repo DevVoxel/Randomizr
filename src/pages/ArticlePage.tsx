@@ -51,6 +51,18 @@ export default function ArticlePage() {
                     <code>{b.text}</code>
                   </pre>
                 )
+              case 'img':
+                return (
+                  <figure key={i} className="my-2">
+                    <img
+                      src={b.src}
+                      alt={b.alt}
+                      loading="lazy"
+                      className="w-full border-2 border-foreground grayscale contrast-110 hard-shadow-sm"
+                    />
+                    <figcaption className="mt-2 text-xs text-muted-foreground">{b.caption}</figcaption>
+                  </figure>
+                )
               default:
                 return (
                   <p key={i} className="text-sm leading-7">

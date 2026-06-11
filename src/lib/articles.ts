@@ -3,6 +3,7 @@ export type Block =
   | { t: 'h2'; text: string }
   | { t: 'code'; text: string }
   | { t: 'quote'; text: string }
+  | { t: 'img'; src: string; alt: string; caption: string }
 
 export interface Article {
   slug: string
@@ -155,6 +156,12 @@ export const ARTICLES: Article[] = [
       {
         t: 'p',
         text: 'In the lobby of Cloudflare\'s San Francisco office stands a wall of about a hundred lava lamps. A camera watches them. The blobs rise and fall chaotically, the image sensor adds its own thermal noise, passers-by drift through the frame, and every frame gets hashed into a stream of unpredictable bits. The system is called LavaRand, and it feeds entropy into keys that encrypt a meaningful fraction of web traffic.',
+      },
+      {
+        t: 'img',
+        src: '/learn/lavarand-wall.jpg',
+        alt: 'The wall of lava lamps in the lobby of the Cloudflare office in San Francisco',
+        caption: 'The wall itself, mid-shift. Photo by HaeB, CC BY-SA 4.0, via Wikimedia Commons.',
       },
       { t: 'h2', text: 'Why a lamp, of all things' },
       {

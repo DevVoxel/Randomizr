@@ -4,8 +4,7 @@ import type { Item } from '../../lib/types'
 import { randomInt, shuffle } from '../../lib/random'
 import { ResultBanner } from '../ResultBanner'
 
-const MAX_ITEMS = 12
-const TICK_MS = 110
+const LABELED_MAX = 14 // beyond this, seats show numbers and a legend carries the names
 
 interface Tick {
   idx: number
@@ -43,9 +42,11 @@ export default function Eeny({ items, onResult }: { items: Item[]; onResult: (it
 
   const run = () => {
     window.clearInterval(timerRef.current)
-    const sampled = items.length > MAX_ITEMS ? shuffle(items).slice(0, MAX_ITEMS) : shuffle(items)
+    const sampled = shuffle(items)
     const k = randomInt(3, 7)
     const { ticks, survivor } = buildTicks(sampled.length, k)
+    // big circles count faster, so the whole rite stays around ten seconds
+    const tickMs = Math.max(28, Math.min(110, Math.round(10_000 / ticks.length)))
     setOrder(sampled)
     setDead(new Set())
     setDone(false)
@@ -63,20 +64,15 @@ export default function Eeny({ items, onResult }: { items: Item[]; onResult: (it
       const tick = ticks[t++]
       setCursor(tick.idx)
       if (tick.eliminate) setDead((d) => new Set(d).add(tick.idx))
-    }, TICK_MS)
+    }, tickMs)
   }
 
   const n = order?.length ?? 0
+  const labeled = n <= LABELED_MAX
   const winner = order && done ? order[cursor] : null
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
-      {items.length > MAX_ITEMS && (
-        <p className="text-xs text-muted-foreground">
-          The circle fits {MAX_ITEMS}, so each round counts {MAX_ITEMS} of your {items.length} items.
-        </p>
-      )}
-
       {order && (
         <div className="relative size-72 sm:size-80">
           {order.map((item, i) => {
@@ -86,7 +82,9 @@ export default function Eeny({ items, onResult }: { items: Item[]; onResult: (it
             return (
               <div
                 key={item.id}
-                className={`absolute -translate-x-1/2 -translate-y-1/2 max-w-24 truncate px-1.5 py-0.5 text-xs border-2 text-center transition-colors duration-75 ${
+                className={`absolute -translate-x-1/2 -translate-y-1/2 truncate border-2 text-center transition-colors duration-75 ${
+                  labeled ? 'max-w-24 px-1.5 py-0.5 text-xs' : 'px-1 text-[9px] leading-4'
+                } ${
                   isCursor && !isDead
                     ? 'bg-foreground text-background border-foreground font-semibold'
                     : isDead
@@ -98,7 +96,7 @@ export default function Eeny({ items, onResult }: { items: Item[]; onResult: (it
                   top: `${50 + 44 * Math.sin(angle)}%`,
                 }}
               >
-                {item.label}
+                {labeled ? item.label : i + 1}
               </div>
             )
           })}
@@ -106,6 +104,25 @@ export default function Eeny({ items, onResult }: { items: Item[]; onResult: (it
             {counting ? 'counting…' : done ? 'survivor' : ''}
           </div>
         </div>
+      )}
+
+      {order && !labeled && (
+        <ol className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1 text-xs w-full max-w-lg max-h-36 overflow-y-auto">
+          {order.map((item, i) => (
+            <li
+              key={item.id}
+              className={`truncate ${
+                done && i === cursor
+                  ? 'bg-foreground text-background px-1 font-semibold'
+                  : dead.has(i)
+                    ? 'text-muted-foreground/50 line-through'
+                    : 'text-muted-foreground'
+              }`}
+            >
+              {i + 1}· {item.label}
+            </li>
+          ))}
+        </ol>
       )}
 
       <button onClick={run} disabled={counting} className="btn-ink inline-flex items-center gap-2 px-8 py-3 font-semibold text-lg">

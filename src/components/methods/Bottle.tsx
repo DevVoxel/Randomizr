@@ -4,20 +4,19 @@ import type { Item } from '../../lib/types'
 import { pickIndex, randomFloat, shuffle } from '../../lib/random'
 import { ResultBanner } from '../ResultBanner'
 
-const MAX_ITEMS = 12
+const LABELED_MAX = 14 // beyond this, seats show numbers and a legend carries the names
 const SPIN_MS = 3200
 
 export default function Bottle({ items, onResult }: { items: Item[]; onResult: (item: Item) => void }) {
   // the circle is fixed for this mount; Randomize remounts Bottle when the list changes
-  const [circle] = useState<Item[]>(() =>
-    items.length > MAX_ITEMS ? shuffle(items).slice(0, MAX_ITEMS) : [...items],
-  )
+  const [circle] = useState<Item[]>(() => shuffle(items))
   const [rotation, setRotation] = useState(0)
   const [spinning, setSpinning] = useState(false)
   const [winner, setWinner] = useState<Item | null>(null)
   const pendingRef = useRef<Item | null>(null)
 
   const n = circle.length
+  const labeled = n <= LABELED_MAX
 
   const spin = () => {
     if (spinning || n < 2) return
@@ -44,12 +43,6 @@ export default function Bottle({ items, onResult }: { items: Item[]; onResult: (
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
-      {items.length > MAX_ITEMS && (
-        <p className="text-xs text-muted-foreground">
-          The circle seats {MAX_ITEMS}, sampled from your {items.length}.
-        </p>
-      )}
-
       <div className="relative size-80 sm:size-96">
         {circle.map((item, i) => {
           const angle = (i / n) * 2 * Math.PI - Math.PI / 2
@@ -57,7 +50,9 @@ export default function Bottle({ items, onResult }: { items: Item[]; onResult: (
           return (
             <div
               key={item.id}
-              className={`absolute -translate-x-1/2 -translate-y-1/2 max-w-24 truncate px-1.5 py-0.5 text-xs border-2 text-center ${
+              className={`absolute -translate-x-1/2 -translate-y-1/2 truncate border-2 text-center ${
+                labeled ? 'max-w-24 px-1.5 py-0.5 text-xs' : 'px-1 text-[9px] leading-4'
+              } ${
                 isWinner ? 'bg-foreground text-background border-foreground font-semibold' : 'border-foreground'
               }`}
               style={{
@@ -65,7 +60,7 @@ export default function Bottle({ items, onResult }: { items: Item[]; onResult: (
                 top: `${50 + 44 * Math.sin(angle)}%`,
               }}
             >
-              {item.label}
+              {labeled ? item.label : i + 1}
             </div>
           )
         })}
@@ -90,6 +85,19 @@ export default function Bottle({ items, onResult }: { items: Item[]; onResult: (
           </svg>
         </div>
       </div>
+
+      {!labeled && (
+        <ol className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1 text-xs w-full max-w-lg max-h-36 overflow-y-auto">
+          {circle.map((item, i) => (
+            <li
+              key={item.id}
+              className={`truncate ${winner?.id === item.id ? 'bg-foreground text-background px-1 font-semibold' : 'text-muted-foreground'}`}
+            >
+              {i + 1}· {item.label}
+            </li>
+          ))}
+        </ol>
+      )}
 
       <button onClick={spin} disabled={spinning || n < 2} className="btn-ink inline-flex items-center gap-2 px-8 py-3 font-semibold text-lg">
         <Play className="size-5" />
