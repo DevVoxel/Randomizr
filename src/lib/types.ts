@@ -30,8 +30,13 @@ export type MethodId =
   | 'ladder'
   | 'bracket'
   | 'teams'
+  | 'straws'
+  | 'eeny'
+  | 'sortrace'
+  | 'plinko'
   | 'number'
   | 'coin'
+  | 'eightball'
   | 'timeline'
 
 export interface MethodDef {
@@ -87,6 +92,34 @@ export const METHODS: MethodDef[] = [
     minItems: 4,
   },
   {
+    id: 'straws',
+    name: 'Short Straw',
+    tagline: 'pull one',
+    description: 'A fist of straws, one cut short. Pull any straw to open the hand — whoever holds the short one takes the verdict.',
+    minItems: 2,
+  },
+  {
+    id: 'eeny',
+    name: 'Eeny Meeny',
+    tagline: 'counting-out',
+    description: 'The schoolyard rhyme, run to completion. Counting eliminates items one at a time until a single survivor remains.',
+    minItems: 3,
+  },
+  {
+    id: 'sortrace',
+    name: 'Sort Race',
+    tagline: 'algorithms, racing',
+    description: 'Your items get secret random ranks, then bubble, insertion, and selection sort race to put them in order. The nerdiest shuffle on the site.',
+    minItems: 3,
+  },
+  {
+    id: 'plinko',
+    name: 'Plinko',
+    tagline: 'aim, drop, pray',
+    description: 'A board of ink pegs, a disc, and gravity. Aim the drop wherever you like — the bounces have other plans.',
+    minItems: 2,
+  },
+  {
     id: 'dice',
     name: 'Dice Roll',
     tagline: '1d6 to 6d6',
@@ -105,6 +138,13 @@ export const METHODS: MethodDef[] = [
     name: 'Coin Flip',
     tagline: '50/50',
     description: 'Two sides, named whatever you want. The oldest decision engine there is.',
+    minItems: 0,
+  },
+  {
+    id: 'eightball',
+    name: 'Magic 8-Ball',
+    tagline: 'ask it anything',
+    description: 'Twenty stock answers, one shaken sphere. No list required — just a question you were going to answer yourself anyway.',
     minItems: 0,
   },
   {

@@ -12,12 +12,12 @@ export function ResultBanner({ label, image, meta }: { label: string; image?: st
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
         transition={{ type: 'spring', stiffness: 400, damping: 24 }}
-        className="bg-foreground text-background px-7 py-4 text-center hard-shadow"
+        className="bg-foreground text-background px-4 sm:px-7 py-4 text-center hard-shadow max-w-full min-w-0"
       >
-        <div className="border border-dashed border-background/50 px-5 py-3 -mx-2">
+        <div className="border border-dashed border-background/50 px-3 sm:px-5 py-3">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-70 mb-1.5">— verdict —</div>
           {image && <img src={image} alt="" className="mx-auto mb-2 max-h-40 object-cover border-2 border-background" />}
-          <div className="font-brand text-3xl leading-none">
+          <div className="font-brand text-2xl sm:text-3xl leading-tight break-words">
             {label}
             {meta && <span className="ml-2 text-base opacity-70">({meta})</span>}
           </div>

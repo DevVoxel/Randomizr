@@ -12,6 +12,11 @@ import Slots from '../components/methods/Slots'
 import Ladder from '../components/methods/Ladder'
 import Bracket from '../components/methods/Bracket'
 import Teams from '../components/methods/Teams'
+import Straws from '../components/methods/Straws'
+import Eeny from '../components/methods/Eeny'
+import SortRace from '../components/methods/SortRace'
+import Plinko from '../components/methods/Plinko'
+import EightBall from '../components/methods/EightBall'
 import Dice from '../components/methods/Dice'
 import NumberGen from '../components/methods/NumberGen'
 import Coin from '../components/methods/Coin'
@@ -92,7 +97,7 @@ export default function Randomize() {
             </div>
           </header>
 
-          <div className="flex-1 grid place-items-center p-6 sm:p-10">
+          <div className="flex-1 grid place-items-center p-4 sm:p-10 *:min-w-0 *:max-w-full">
             {needsItems ? (
               <div className="text-center max-w-sm">
                 <div className="halftone-faint size-16 mx-auto mb-4" aria-hidden />
@@ -128,9 +133,15 @@ function Stage({
     case 'ladder': return <Ladder items={items} onResult={onItem} />
     case 'bracket': return <Bracket items={items} onResult={onItem} />
     case 'teams': return <Teams items={items} onLabel={onLabel} />
+    case 'straws': return <Straws items={items} onResult={onItem} />
+    case 'eeny': return <Eeny items={items} onResult={onItem} />
+    case 'sortrace': return <SortRace items={items} onResult={onItem} />
+    // keyed so a list change rebuilds the board with fresh bins
+    case 'plinko': return <Plinko key={items.map((i) => i.id).join()} items={items} onResult={onItem} />
     case 'dice': return <Dice items={items} onResult={onItem} />
     case 'number': return <NumberGen onResult={onLabel} />
     case 'coin': return <Coin onResult={onLabel} />
+    case 'eightball': return <EightBall onResult={onLabel} />
     case 'timeline': return <Timeline items={items} onResult={onItem} />
   }
 }

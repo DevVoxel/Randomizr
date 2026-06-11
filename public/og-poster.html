@@ -1,0 +1,62 @@
+<!doctype html>
+<!-- Source for /og.png — open at 1200×630 and screenshot to regenerate. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<style>
+  @font-face {
+    font-family: 'bpdotsbold';
+    src: url('/fonts/BPdotsBold-webfont.woff') format('woff');
+  }
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px;
+    background: #f7f5f0; color: #2b2722;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    display: flex; flex-direction: column;
+    border: 6px solid #2b2722;
+  }
+  main { flex: 1; display: flex; align-items: center; padding: 0 72px; gap: 48px; }
+  h1 { font-family: 'bpdotsbold'; font-weight: normal; font-size: 110px; line-height: 0.95; }
+  .sub { margin-top: 28px; font-size: 24px; letter-spacing: 0.04em; }
+  .kicker { font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; color: #5d574f; margin-bottom: 24px; }
+  .art {
+    flex-shrink: 0; width: 300px; height: 420px;
+    background-image: radial-gradient(circle, rgba(43,39,34,0.22) 4px, transparent 4.5px);
+    background-size: 26px 26px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  footer {
+    border-top: 4px solid #2b2722;
+    padding: 18px 72px;
+    display: flex; justify-content: space-between;
+    font-size: 20px;
+  }
+  .brand { font-family: 'bpdotsbold'; font-size: 26px; }
+</style>
+</head>
+<body>
+  <main>
+    <div>
+      <div class="kicker">fifteen methods · est. 2010</div>
+      <h1>Randomize<br/>anything.</h1>
+      <div class="sub">Wheels, brackets, ladders, dice — paste a list and stop arguing.</div>
+    </div>
+    <div class="art">
+      <svg viewBox="0 0 62 86" width="220" fill="#2b2722" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="7" cy="7" r="5"/><circle cx="19" cy="7" r="5"/><circle cx="31" cy="7" r="5"/><circle cx="43" cy="7" r="5"/>
+        <circle cx="7" cy="19" r="5"/><circle cx="55" cy="19" r="5"/>
+        <circle cx="7" cy="31" r="5"/><circle cx="55" cy="31" r="5"/>
+        <circle cx="7" cy="43" r="5"/><circle cx="19" cy="43" r="5"/><circle cx="31" cy="43" r="5"/><circle cx="43" cy="43" r="5"/>
+        <circle cx="7" cy="55" r="5"/><circle cx="31" cy="55" r="5"/>
+        <circle cx="7" cy="67" r="5"/><circle cx="43" cy="67" r="5"/>
+        <circle cx="7" cy="79" r="5"/><circle cx="55" cy="79" r="5"/>
+      </svg>
+    </div>
+  </main>
+  <footer>
+    <span class="brand">theRandomizr</span>
+    <span>crypto.getRandomValues() · no take-backs</span>
+  </footer>
+</body>
+</html>

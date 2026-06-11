@@ -7,15 +7,17 @@ Feed in data from any **source**, pick any **method**:
 | Sources | Methods |
 |---|---|
 | Typed lists (one per line) | Roulette Wheel |
-| Built-in presets (movies, food, names, games…) | Card Draw |
+| Built-in presets (12 packs: movies, food, icebreakers…) | Card Draw |
 | Spreadsheets (CSV / TSV upload, Google Sheets link) | Slot Machine |
 | Images (upload, drag-drop, or URL) | Ladder Lottery (amidakuji) |
 | Letterboxd (RSS by username, or CSV export) | Tournament (single elimination) |
 | Goodreads (shelf RSS) | Team Splitter |
-| Saved lists (localStorage) | Dice Roll |
-| Share links (`?share=` — a whole list in a URL) | Number Generator |
-| Number ranges | Coin Flip |
-| | Timeline Shuffle (full random ordering) |
+| Saved lists (localStorage) | Short Straw |
+| Share links (`?share=` — a whole list in a URL) | Eeny Meeny (counting-out / Josephus) |
+| Number ranges | Sort Race (bubble vs insertion vs selection) |
+| | Plinko (canvas physics, aim the drop) |
+| | Dice Roll · Number Generator · Coin Flip |
+| | Magic 8-Ball · Timeline Shuffle |
 
 Results are recorded to a local history. Lists save to your browser — no account needed.
 Any list can be copied as a share link and opened on someone else's machine.
@@ -59,8 +61,9 @@ Open http://localhost:5173.
 ```
 src/
   components/
-    methods/       Wheel, Cards, Slots, Ladder, Bracket, Teams,
-                   Dice, NumberGen, Coin, Timeline
+    methods/       Wheel, Cards, Slots, Ladder, Bracket, Teams, Straws,
+                   Eeny, SortRace, Plinko, Dice, NumberGen, Coin,
+                   EightBall, Timeline
     source/        SourcePanel (type / presets / images / sheet / watchlists / saved)
     Logo.tsx       dotted-R mark
   pages/           Home, Randomize (/randomize/:method), Lists
