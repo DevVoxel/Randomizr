@@ -58,7 +58,7 @@ export default function ArticlePage() {
                       src={b.src}
                       alt={b.alt}
                       loading="lazy"
-                      className="w-full border-2 border-foreground grayscale contrast-110 hard-shadow-sm"
+                      className="w-full border-2 border-foreground hard-shadow-sm"
                     />
                     <figcaption className="mt-2 text-xs text-muted-foreground">{b.caption}</figcaption>
                   </figure>

@@ -65,7 +65,7 @@ export default function Wiki({ onLabel }: { onLabel: (label: string) => void }) 
             <img
               src={card.image}
               alt=""
-              className="w-full max-h-56 object-cover grayscale contrast-110 border-b-2 border-foreground"
+              className="w-full max-h-56 object-cover border-b-2 border-foreground"
               loading="lazy"
             />
           )}
