@@ -1,4 +1,5 @@
 import { randomInt } from './random'
+import COUNTRIES from './data/countries.json'
 
 /**
  * Discover channels pull one random thing from a public, keyless,
@@ -149,8 +150,17 @@ interface TriviaAnswer {
   results?: { category?: string; question?: string; correct_answer?: string; difficulty?: string }[]
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
+
 async function pullTrivia(): Promise<DiscoverCard> {
-  const data = (await get('https://opentdb.com/api.php?amount=1')) as TriviaAnswer
+  // opentdb allows one request per IP every five seconds; wait out a 429 once
+  let data: TriviaAnswer
+  try {
+    data = (await get('https://opentdb.com/api.php?amount=1')) as TriviaAnswer
+  } catch {
+    await sleep(5_300)
+    data = (await get('https://opentdb.com/api.php?amount=1')) as TriviaAnswer
+  }
   const q = data.results?.[0]
   if (!q?.question || !q.correct_answer) throw new Error('The quizmaster is out')
   return {
@@ -185,38 +195,35 @@ async function pullPoem(): Promise<DiscoverCard> {
 /* ---------------- country ---------------- */
 
 interface Country {
-  name?: { common?: string; official?: string }
-  capital?: string[]
-  population?: number
-  region?: string
-  subregion?: string
-  languages?: Record<string, string>
-  flags?: { svg?: string; png?: string }
-  area?: number
+  n: string // common name
+  o: string // official name
+  c: string | null // capital
+  r: string | null // region
+  s: string | null // subregion
+  l: string[] // languages
+  a: number | null // area km²
+  p: number | null // population
+  f: string // ISO 3166-1 alpha-2, lowercase
 }
 
-let countryCache: Country[] | null = null
-
+/** REST Countries went key-only in its v5 rewrite, so the atlas ships with the site. */
 async function pullCountry(): Promise<DiscoverCard> {
-  if (!countryCache) {
-    countryCache = (await get(
-      'https://restcountries.com/v3.1/all?fields=name,capital,population,region,subregion,languages,flags,area',
-    )) as Country[]
-  }
-  const c = countryCache[randomInt(0, countryCache.length - 1)]
-  if (!c?.name?.common) throw new Error('The atlas page was blank')
+  const atlas = COUNTRIES as Country[]
+  const c = atlas[randomInt(0, atlas.length - 1)]
   return {
-    kicker: 'rest countries',
-    title: c.name.common,
-    sub: c.name.official,
-    image: c.flags?.svg ?? c.flags?.png,
+    kicker: 'the bundled atlas · 250 entries',
+    title: c.n,
+    sub: c.o,
+    image: c.f ? `https://flagcdn.com/w640/${c.f}.png` : undefined,
     facts: [
-      ['capital', c.capital?.join(', ') || 'none'],
-      ['region', [c.region, c.subregion].filter(Boolean).join(' · ')],
-      ['population', (c.population ?? 0).toLocaleString('en')],
-      ['area', `${(c.area ?? 0).toLocaleString('en')} km²`],
-      ['languages', Object.values(c.languages ?? {}).slice(0, 4).join(', ') || 'unlisted'],
+      ['capital', c.c || 'none'],
+      ['region', [c.r, c.s].filter(Boolean).join(' · ') || 'unplaced'],
+      ['population', c.p ? c.p.toLocaleString('en') : 'uncounted'],
+      ['area', c.a ? `${c.a.toLocaleString('en')} km²` : 'unmeasured'],
+      ['languages', c.l.join(', ') || 'unlisted'],
     ],
+    link: `https://en.wikipedia.org/wiki/${encodeURIComponent(c.n)}`,
+    linkLabel: 'read more →',
   }
 }
 
@@ -244,6 +251,7 @@ async function pullMeal(): Promise<DiscoverCard> {
 
 interface Cocktail {
   drinks?: {
+    idDrink?: string
     strDrink?: string
     strCategory?: string
     strAlcoholic?: string
@@ -262,6 +270,8 @@ async function pullCocktail(): Promise<DiscoverCard> {
     sub: [c.strAlcoholic, c.strCategory].filter(Boolean).join(' · '),
     image: c.strDrinkThumb ? `${c.strDrinkThumb}/medium` : undefined,
     body: c.strInstructions,
+    link: c.idDrink ? `https://www.thecocktaildb.com/drink/${c.idDrink}` : undefined,
+    linkLabel: 'full recipe →',
   }
 }
 
@@ -284,6 +294,20 @@ async function pullDog(): Promise<DiscoverCard> {
 }
 
 export const CHANNELS: Channel[] = [
+  {
+    id: 'meal',
+    name: 'Dinner idea',
+    note: 'a dish you were not going to think of',
+    credit: 'TheMealDB',
+    pull: pullMeal,
+  },
+  {
+    id: 'cocktail',
+    name: 'Cocktail',
+    note: 'mixed by the void',
+    credit: 'TheCocktailDB',
+    pull: pullCocktail,
+  },
   {
     id: 'space',
     name: 'Space',
@@ -323,22 +347,8 @@ export const CHANNELS: Channel[] = [
     id: 'country',
     name: 'Country',
     note: 'flag, facts, and figures',
-    credit: 'REST Countries',
+    credit: 'the bundled atlas · flagcdn',
     pull: pullCountry,
-  },
-  {
-    id: 'meal',
-    name: 'Dinner idea',
-    note: 'a dish you were not going to think of',
-    credit: 'TheMealDB',
-    pull: pullMeal,
-  },
-  {
-    id: 'cocktail',
-    name: 'Cocktail',
-    note: 'mixed by the void',
-    credit: 'TheCocktailDB',
-    pull: pullCocktail,
   },
   {
     id: 'dog',
