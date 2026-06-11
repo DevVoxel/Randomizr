@@ -4,7 +4,7 @@ import type { Item } from '../../lib/types'
 import { pickIndex, randomFloat, shuffle } from '../../lib/random'
 import { ResultBanner } from '../ResultBanner'
 
-const MAX_COLS = 8
+const MAX_COLS = 10
 const ROWS = 10
 const COL_W = 72
 const ROW_H = 34
@@ -97,7 +97,7 @@ export default function Ladder({ items, onResult }: { items: Item[]; onResult: (
       )}
 
       {layout && (
-        <svg key={round} viewBox={`0 0 ${width} ${height}`} className="w-full max-w-xl" role="img" aria-label="Ladder lottery board">
+        <svg key={round} viewBox={`0 0 ${width} ${height}`} className="w-full max-w-2xl" role="img" aria-label="Ladder lottery board">
           {/* rotated item labels above each rail */}
           {layout.order.map((item, c) => (
             <text

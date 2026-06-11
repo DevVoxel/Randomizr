@@ -4,7 +4,7 @@ import type { Item } from '../../lib/types'
 import { pickIndex, shuffle } from '../../lib/random'
 import { ResultBanner } from '../ResultBanner'
 
-const MAX_STRAWS = 12
+const MAX_STRAWS = 16
 const LONG = 120
 const SHORT = 64
 const REVEAL_MS = 700
@@ -46,7 +46,7 @@ export default function Straws({ items, onResult }: { items: Item[]; onResult: (
 
       {round && (
         <div className="flex flex-col items-center">
-          <div className="flex items-end gap-3 sm:gap-4" style={{ height: LONG + 24 }}>
+          <div className="flex items-end gap-2 sm:gap-3" style={{ height: LONG + 24 }}>
             {round.order.map((item, i) => {
               const isShort = i === round.shortIdx
               return (

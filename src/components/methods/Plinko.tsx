@@ -3,8 +3,8 @@ import type { Item } from '../../lib/types'
 import { randomFloat, shuffle } from '../../lib/random'
 import { ResultBanner } from '../ResultBanner'
 
-const MAX_BINS = 8
-const W = 400
+const BIN_W = 46 // internal px per bin; the board widens with the list
+const MIN_W = 400
 const H = 520
 const PEG_ROWS = 9
 const PEG_R = 4
@@ -15,16 +15,16 @@ const BIN_TOP = H - 64
 
 interface Peg { x: number; y: number }
 
-function buildPegs(): Peg[] {
+function buildPegs(width: number): Peg[] {
   const pegs: Peg[] = []
   const rowH = (BIN_TOP - 90) / PEG_ROWS
+  const cols = Math.round(width / 44)
   for (let r = 0; r < PEG_ROWS; r++) {
     const y = 90 + r * rowH
-    const cols = 9
-    const offset = r % 2 === 0 ? 0 : W / cols / 2
+    const offset = r % 2 === 0 ? 0 : width / cols / 2
     for (let c = 0; c <= cols; c++) {
-      const x = offset + (c * W) / cols
-      if (x > 12 && x < W - 12) pegs.push({ x, y })
+      const x = offset + (c * width) / cols
+      if (x > 12 && x < width - 12) pegs.push({ x, y })
     }
   }
   return pegs
@@ -34,14 +34,13 @@ interface Ball { x: number; y: number; vx: number; vy: number; landed: number | 
 
 export default function Plinko({ items, onResult }: { items: Item[]; onResult: (item: Item) => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  // bins are fixed for this mount; Randomize remounts Plinko when the list changes
-  const [bins] = useState<Item[]>(() =>
-    items.length > MAX_BINS ? shuffle(items).slice(0, MAX_BINS) : [...items],
-  )
+  // every item gets a bin; the board is fixed for this mount (Randomize remounts on list change)
+  const [bins] = useState<Item[]>(() => shuffle(items))
+  const W = Math.max(MIN_W, bins.length * BIN_W)
   const [winner, setWinner] = useState<Item | null>(null)
   const aimX = useRef(W / 2)
   const ball = useRef<Ball | null>(null)
-  const pegs = useRef<Peg[]>(buildPegs())
+  const pegs = useRef<Peg[]>(buildPegs(W))
   const litBin = useRef<number | null>(null)
 
   useEffect(() => {
@@ -57,6 +56,7 @@ export default function Plinko({ items, onResult }: { items: Item[]; onResult: (
     const step = () => {
       const b = ball.current
       const n = bins.length
+      const binW = W / n
       if (b && b.landed === null) {
         b.vy += GRAVITY
         b.x += b.vx
@@ -78,11 +78,14 @@ export default function Plinko({ items, onResult }: { items: Item[]; onResult: (
             b.vy = (b.vy - 2 * dot * ny) * RESTITUTION
             b.x = p.x + nx * minDist
             b.y = p.y + ny * minDist
+            // a disc balancing on top of a peg gets kicked off, never parked
+            if (Math.abs(b.vx) + Math.abs(b.vy) < 0.9 && ny < -0.5) {
+              b.vx += (randomFloat() < 0.5 ? -1 : 1) * (0.9 + randomFloat() * 0.5)
+            }
           }
         }
         // bin divider collisions keep the ball inside one slot
         if (b.y > BIN_TOP - BALL_R && n > 0) {
-          const binW = W / n
           const slot = Math.max(0, Math.min(n - 1, Math.floor(b.x / binW)))
           const leftWall = slot * binW
           const rightWall = (slot + 1) * binW
@@ -122,20 +125,23 @@ export default function Plinko({ items, onResult }: { items: Item[]; onResult: (
         ctx.fill()
       }
       if (n > 0) {
-        const binW = W / n
         for (let i = 0; i <= n; i++) {
           ctx.fillRect(i * binW - (i === n ? 2 : 0), BIN_TOP, 2, H - BIN_TOP)
         }
         ctx.fillRect(0, H - 2, W, 2)
+        // numbers only fit when bins are wide enough; the legend always has them
+        const showNumbers = binW >= 22
         for (let i = 0; i < n; i++) {
           if (litBin.current === i) {
             ctx.fillRect(i * binW + 2, BIN_TOP, binW - 4, H - BIN_TOP)
           }
-          ctx.font = '600 14px ui-monospace, monospace'
-          ctx.textAlign = 'center'
-          ctx.fillStyle = litBin.current === i ? paper : ink
-          ctx.fillText(String(i + 1), i * binW + binW / 2, BIN_TOP + 24)
-          ctx.fillStyle = ink
+          if (showNumbers) {
+            ctx.font = '600 13px ui-monospace, monospace'
+            ctx.textAlign = 'center'
+            ctx.fillStyle = litBin.current === i ? paper : ink
+            ctx.fillText(String(i + 1), i * binW + binW / 2, BIN_TOP + 24)
+            ctx.fillStyle = ink
+          }
         }
       }
       if (b) {
@@ -151,7 +157,7 @@ export default function Plinko({ items, onResult }: { items: Item[]; onResult: (
     }
     raf = requestAnimationFrame(step)
     return () => cancelAnimationFrame(raf)
-  }, [onResult, bins])
+  }, [onResult, bins, W])
 
   const toCanvasX = (e: React.PointerEvent<HTMLCanvasElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -175,24 +181,30 @@ export default function Plinko({ items, onResult }: { items: Item[]; onResult: (
     }
   }
 
+  // small boards stretch to the container; big boards keep 1:1 px and pan sideways
+  const oversized = W > 640
+
   return (
     <div className="flex flex-col items-center gap-5 w-full">
       <p className="text-xs text-muted-foreground">
-        Aim with your pointer, tap to drop.
-        {items.length > MAX_BINS && ` Board holds ${MAX_BINS} bins, sampled from your ${items.length}.`}
+        Aim with your pointer, tap to drop. Every one of your {bins.length} items has a bin.
+        {oversized && ' Big list, big board: slide it sideways.'}
       </p>
 
-      <canvas
-        ref={canvasRef}
-        width={W}
-        height={H}
-        onPointerMove={aim}
-        onPointerDown={(e) => { aim(e); drop() }}
-        className="border-2 border-foreground hard-shadow w-full max-w-sm touch-none cursor-crosshair select-none"
-        aria-label="Plinko board. Tap to drop the disc"
-      />
+      <div className="w-full overflow-x-auto flex justify-start sm:justify-center">
+        <canvas
+          ref={canvasRef}
+          width={W}
+          height={H}
+          onPointerMove={aim}
+          onPointerDown={(e) => { aim(e); drop() }}
+          className="border-2 border-foreground hard-shadow touch-none cursor-crosshair select-none shrink-0"
+          style={oversized ? { width: W } : { width: '100%', maxWidth: '26rem' }}
+          aria-label="Plinko board. Tap to drop the disc"
+        />
+      </div>
 
-      <ol className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-1 text-xs w-full max-w-md">
+      <ol className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-1 text-xs w-full max-w-md max-h-40 overflow-y-auto">
         {bins.map((item, i) => (
           <li
             key={item.id}

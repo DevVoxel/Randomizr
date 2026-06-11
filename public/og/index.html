@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>theRandomizr</title>
+        <link rel="stylesheet" href="css/fonts.css" type="text/css" charset="utf-8"/>
+        <link rel="stylesheet" href="css/style.css" type="text/css"/>
+        
+        
+    </head>
+    
+    <body>
+        <header>
+          
+            
+            <h1>theRandomizr</h1>
+<img src="images/therandomizr_small.jpg" alt="the randomizr" />
+            <h2>Click the button to see what movie we will be watching tonight.</h2>
+        </header>
+        <section>
+            <button onclick="myFunction()">Random Movie</button>
+            <h3 id="selectedTitle"></h3>
+            <ol id="movies">
+                <li>Dispicable Me #2</li>
+                <li>Percy Jackson #2</li>
+                <li>Netflix</li>
+                <li>AmazonPrime Free Videos</li>
+                <li>Kung Fu Panda #2</li>
+                <li>Journey #2</li>
+                <li>Bolt</li>
+                <li>Madacascar #1</li>
+                <li>Garfield #2</li>
+                <li>Night at The Meuseum #2</li>
+                <li>The Smurfs</li>
+                <li>Ratatouille</li>
+                <li>Aliens in The Attic</li>
+                <li>Madacascar #2</li>
+                <li>Garfield #1</li>
+                <li>The Last Airbender</li>
+                <li>How to Train Your Dragon</li>
+                <li>Toy Story #3</li>
+                <li>The Karate Kid</li>
+                <li>Narnia #3</li>
+                <li>The Haunted Mansion</li>
+                <li>Narnia #2</li>
+                <li>Narnia #1</li>
+                <li>Alvin and The Chipmonks #3</li>
+                <li>Dispicable Me #1</li>
+                <li>Over The Hedge</li>
+                <li>Rio</li>
+                <li>Hop</li>
+                <li>The Bee Movie</li>
+                <li>The Incredibles</li>
+                <li>Lilo and Stitch</li>
+                <li>Horton Hears a Who</li>
+                <li>Mr.Poppers Penguins</li>
+                <li>Alvin and The Chipmonks #2</li>
+                <li>Willy Wonka</li>
+                <li>An American Tale</li>
+                <li>Shrek The Third</li>
+                <li>Ice Age #2</li>
+                <li>The Croods</li>
+                <li>Ice Age #4</li>
+                <li>Finding Nemo</li>
+                <li>G-Force</li>
+                <li>Madacascar #3</li>
+                <li>Spirit</li>
+                <li>Kung Fu Panda #1</li>
+                <li>Scooby Doo</li>
+                <li>Agent Cody Banks</li>
+                <li>Open Season #3</li>
+                <li>Ice Age #2</li>
+                <li>Ice Age #1</li>
+                <li>Tin Tin</li>
+                <li>Brother Bear</li>
+                <li>Cars</li>
+                <li>Wall-E</li>
+            </ol>
+        </section>
+        <script>
+            function myFunction() {
+                var movies = document.getElementById("movies");
+                var moviesLi = movies.getElementsByTagName("li");
+                var selectedNumber = Math.floor((Math.random() * moviesLi.length - 1) + 1);
+                var selectedMovie = moviesLi[selectedNumber];
+
+
+                for (var i = moviesLi.length - 1; i >= 0; i--) {
+                    moviesLi[i].setAttribute("style", "font-weight: normal;color: black;");
+                }
+
+                selectedMovie.setAttribute("style", "font-weight: bold;color: red;");
+                document.getElementById('selectedTitle').innerHTML = selectedMovie.innerHTML;
+            }
+        </script>
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </body>
+</html> -->

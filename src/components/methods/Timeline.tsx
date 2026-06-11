@@ -34,7 +34,7 @@ export default function Timeline({ items, onResult }: { items: Item[]; onResult:
               key={item.id}
               initial={{ opacity: 0, x: -24 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.1, type: 'spring', stiffness: 200, damping: 22 }}
+              transition={{ delay: Math.min(i * 0.08, 2.4), type: 'spring', stiffness: 200, damping: 22 }}
               className="relative flex items-center gap-4 py-1.5"
             >
               <span

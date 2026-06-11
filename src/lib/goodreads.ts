@@ -12,7 +12,7 @@ export type GoodreadsShelf = (typeof GOODREADS_SHELVES)[number]
  * goodreads.com/user/show/12345-jane-doe.
  */
 export async function fetchGoodreadsShelf(userIdOrUrl: string, shelf: GoodreadsShelf): Promise<Item[]> {
-  const id = /(\d{3,})/.exec(userIdOrUrl.trim())?.[1]
+  const id = /(\d+)/.exec(userIdOrUrl.trim())?.[1]
   if (!id) throw new Error('Need a Goodreads user id or profile URL')
   const xml = await fetchViaProxy(`https://www.goodreads.com/review/list_rss/${id}?shelf=${shelf}`)
   const items = parseRss(xml)

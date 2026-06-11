@@ -5,7 +5,7 @@ import type { Item } from '../../lib/types'
 import { pickIndex, shuffle } from '../../lib/random'
 import { ResultBanner } from '../ResultBanner'
 
-const MAX_BALLOONS = 12
+const MAX_BALLOONS = 24
 
 interface Round {
   order: Item[]
@@ -43,7 +43,7 @@ export default function Balloons({ items, onResult }: { items: Item[]; onResult:
       </p>
 
       {round && (
-        <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-6 gap-y-8 max-w-md">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-x-5 gap-y-7 max-w-2xl">
           {round.order.map((item, i) => {
             const isPopped = popped.has(i)
             const isWinner = i === round.winnerIdx

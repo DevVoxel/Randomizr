@@ -98,9 +98,9 @@ export default function Randomize() {
           <Link
             key={m.id}
             to={`/randomize/${m.id}`}
-            className={`px-2.5 py-1.5 text-xs whitespace-nowrap border-2 border-foreground ${
+            className={`px-2.5 py-1.5 text-xs whitespace-nowrap border-2 border-foreground transition-shadow ${
               m.id === method.id
-                ? 'bg-foreground text-background font-semibold'
+                ? 'bg-foreground text-background font-semibold hard-shadow-sm'
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted'
             }`}
           >
@@ -134,7 +134,7 @@ export default function Randomize() {
             </div>
           </header>
 
-          <div className="flex-1 grid place-items-center p-4 sm:p-10 *:min-w-0 *:max-w-full">
+          <div className="relative flex-1 grid place-items-center p-4 sm:p-10 *:min-w-0 *:max-w-full">
             {needsItems ? (
               <div className="text-center max-w-sm">
                 <div className="halftone-faint size-16 mx-auto mb-4" aria-hidden />

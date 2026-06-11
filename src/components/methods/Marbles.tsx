@@ -4,7 +4,7 @@ import type { Item } from '../../lib/types'
 import { randomFloat, shuffle } from '../../lib/random'
 import { ResultBanner } from '../ResultBanner'
 
-const MAX_LANES = 10
+const MAX_LANES = 24
 
 export default function Marbles({ items, onResult }: { items: Item[]; onResult: (item: Item) => void }) {
   const [lanes, setLanes] = useState<Item[] | null>(null)

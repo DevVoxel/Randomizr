@@ -5,9 +5,10 @@ import { shuffle } from '../../lib/random'
 import { SORT_ALGOS, type Frames, type SortAlgoId } from '../../lib/sorts'
 import { ResultBanner } from '../ResultBanner'
 
-const MAX_RACERS = 12
-const MAX_SORT = 20
+const MAX_RACERS = 16
+const MAX_SORT = 60
 const FRAME_MS = 80
+const TARGET_TICKS = 140 // playback compresses so any run finishes in ~11s
 const MAX_LANES = 4
 
 type Mode = 'race' | 'sort'
@@ -81,9 +82,11 @@ export default function SortRace({
     setRun({ mode, entrants, start: values, lanes })
     setFrame(0)
     setRunning(true)
+    // long runs (bubble over 60 items is thousands of ops) skip frames to stay watchable
+    const perTick = Math.max(1, Math.ceil(total / TARGET_TICKS))
     let f = 0
     timerRef.current = window.setInterval(() => {
-      f++
+      f = Math.min(f + perTick, total)
       setFrame(f)
       if (f >= total) {
         window.clearInterval(timerRef.current)

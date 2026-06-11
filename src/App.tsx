@@ -29,7 +29,16 @@ export default function App() {
         <footer className="border-t-2 border-foreground py-5 px-5">
           <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
             <span>
-              <span className="font-brand text-sm text-foreground">theRandomizr</span> · est. 2010 · rebuilt 2026
+              <span className="font-brand text-sm text-foreground">theRandomizr</span> ·{' '}
+              <a
+                href="/og/index.html"
+                target="_blank"
+                rel="noopener"
+                className="underline underline-offset-2 decoration-dotted hover:text-foreground"
+              >
+                est. 2010
+              </a>{' '}
+              · rebuilt 2026
             </span>
             <span>randomness: crypto.getRandomValues() · no take-backs</span>
           </div>

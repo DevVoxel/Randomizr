@@ -37,11 +37,12 @@ export function parseDelimited(text: string): string[][] {
 
 /**
  * Heuristic: a first row with no numeric-only cells and no empty cells is
- * probably a header ("Name,Year" yes; "Pulp Fiction,1994" no).
+ * probably a header ("Name,Year" yes; "Pulp Fiction,1994" no). Single-column
+ * files are plain lists, not tables, so they never get a header.
  */
 export function looksLikeHeader(rows: string[][]): boolean {
   const first = rows[0]
-  if (!first || rows.length < 2) return false
+  if (!first || rows.length < 2 || first.length < 2) return false
   return first.every((cell) => cell.trim() !== '' && !/^[\d.,/\s-]+$/.test(cell.trim()))
 }
 

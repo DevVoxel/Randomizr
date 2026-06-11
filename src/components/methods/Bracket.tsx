@@ -4,7 +4,7 @@ import type { Item } from '../../lib/types'
 import { randomInt, shuffle } from '../../lib/random'
 import { ResultBanner } from '../ResultBanner'
 
-const MAX_SEEDS = 16
+const MAX_SEEDS = 32
 const ROUND_MS = 1100
 
 type Slot = Item | null // null = bye
