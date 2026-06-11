@@ -5,6 +5,8 @@ import Randomize from './pages/Randomize'
 import Lists from './pages/Lists'
 import Learn from './pages/Learn'
 import ArticlePage from './pages/ArticlePage'
+import Discover from './pages/Discover'
+import ApiPage from './pages/ApiPage'
 
 export default function App() {
   return (
@@ -17,6 +19,7 @@ export default function App() {
             </Link>
             <div className="flex items-center gap-3 sm:gap-5 text-xs uppercase tracking-[0.18em] whitespace-nowrap shrink-0">
               <NavTab to="/" end label="Methods" />
+              <NavTab to="/discover" label="Discover" />
               <NavTab to="/learn" label="Learn" />
               <NavTab to="/lists" label="Lists" />
             </div>
@@ -29,6 +32,8 @@ export default function App() {
             <Route path="/lists" element={<Lists />} />
             <Route path="/learn" element={<Learn />} />
             <Route path="/learn/:slug" element={<ArticlePage />} />
+            <Route path="/discover" element={<Discover />} />
+            <Route path="/api" element={<ApiPage />} />
           </Routes>
         </div>
         <footer className="border-t-2 border-foreground py-5 px-5">
@@ -52,6 +57,10 @@ export default function App() {
                 className="underline underline-offset-2 decoration-dotted hover:text-foreground"
               >
                 crypto.getRandomValues()
+              </Link>{' '}
+              ·{' '}
+              <Link to="/api" className="underline underline-offset-2 decoration-dotted hover:text-foreground">
+                api
               </Link>{' '}
               · no take-backs
             </span>

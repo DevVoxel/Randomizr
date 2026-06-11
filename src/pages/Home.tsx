@@ -53,12 +53,12 @@ function InstantFate() {
 }
 
 const DISCOVER: { label: string; to: string; note: string }[] = [
+  { label: 'the night sky', to: '/discover', note: 'nasa, one picture at random' },
+  { label: 'somewhere on Earth', to: '/discover', note: 'a fair coordinate, mapped' },
+  { label: 'a museum piece', to: '/discover', note: 'from 120,000 artworks' },
   { label: 'a Wikipedia article', to: '/randomize/wiki', note: 'live from 6,000,000' },
-  { label: 'a person from history', to: '/randomize/wiki', note: 'biographies only' },
-  { label: 'a moment in time', to: '/randomize/wiki', note: 'on this day, any year' },
   { label: 'a chemical element', to: '/randomize/wheel?preset=elements', note: 'all 118 on one wheel' },
   { label: 'a spirit animal', to: '/randomize/cards?preset=animals', note: 'drawn from a deck' },
-  { label: 'a shape', to: '/randomize/plinko?preset=shapes', note: 'decided by gravity' },
 ]
 
 export default function Home() {

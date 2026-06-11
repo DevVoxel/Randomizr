@@ -19,9 +19,11 @@ Feed in data from any **source**, pick any **method**:
 | | Dice Roll · Number Generator · Coin Flip |
 | | Magic 8-Ball · Wikipedia Roulette · Timeline Shuffle |
 
-There is also **The Entropy Press** (`/learn`): short articles on how the
-randomness works, from `crypto.getRandomValues()` and rejection sampling to
-random.org's radios and Cloudflare's lava lamps.
+There is also **The Entropy Press** (`/learn`), short articles on how the
+randomness works, **Discover** (`/discover`), nine channels pulling random
+things live from public APIs (NASA imagery, a fair coordinate on Earth,
+museum artworks, trivia, poems, countries, meals, cocktails, dogs), and
+**The API** (`/api`), documenting the URL scheme and share format.
 
 Results are recorded to a local history. Lists save to your browser — no account needed.
 Any list can be copied as a share link and opened on someone else's machine.
