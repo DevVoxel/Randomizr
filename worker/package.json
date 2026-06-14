@@ -1,0 +1,14 @@
+{
+  "name": "randomizr-proxy",
+  "private": true,
+  "type": "module",
+  "description": "CORS proxy Worker for Randomizr (Letterboxd/Goodreads RSS). Deployed standalone via Cloudflare Workers Builds — root directory: worker/.",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "start": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^4.100.0"
+  }
+}

@@ -1,7 +1,12 @@
 name = "randomizr-proxy"
 main = "proxy-worker.ts"
 compatibility_date = "2026-06-01"
+workers_dev = true
 
-# Deploy:  cd worker && npx wrangler deploy
-# Dev:     cd worker && npx wrangler dev
-# After deploy, copy the *.workers.dev URL into the app's VITE_PROXY_URL.
+# Auto-deploy via Cloudflare Workers Builds:
+#   Dashboard → Workers & Pages → Create → Worker → Connect to Git → this repo.
+#   Set "Root directory" to  worker/  and deploy command to  npx wrangler deploy.
+#   Cloudflare then redeploys this Worker on every push that touches worker/.
+#
+# Manual one-off instead:  cd worker && npx wrangler deploy
+# Local dev:               cd worker && npx wrangler dev   (http://localhost:8787)
