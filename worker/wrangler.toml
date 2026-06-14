@@ -1,0 +1,7 @@
+name = "randomizr-proxy"
+main = "proxy-worker.ts"
+compatibility_date = "2026-06-01"
+
+# Deploy:  cd worker && npx wrangler deploy
+# Dev:     cd worker && npx wrangler dev
+# After deploy, copy the *.workers.dev URL into the app's VITE_PROXY_URL.

@@ -36,3 +36,4 @@ lerna-debug.log*
 coverage
 .cache
 .turbo
+.playwright-mcp

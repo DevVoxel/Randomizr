@@ -76,6 +76,9 @@ src/
   lib/             random (crypto RNG), csv (+ Google Sheets), letterboxd,
                    goodreads, share (?share= links), proxy, presets, storage, types
   state/           ItemsContext + useItems (shared list + history)
+worker/            CORS proxy: shared core + Cloudflare Worker entry
+functions/         Cloudflare Pages Function (proxy at /proxy, same origin)
+server/            Node proxy server for VPS self-hosting
 og/                2010 original (read-only archive)
 public/fonts/      BPdots Bold (original brand font)
 ```
@@ -86,3 +89,22 @@ public/fonts/      BPdots Bold (original brand font)
 |---|---|
 | `VITE_SUPABASE_URL` | Supabase project URL |
 | `VITE_SUPABASE_ANON_KEY` | Supabase anon key |
+| `VITE_PROXY_URL` | CORS proxy for Letterboxd/Goodreads RSS (optional — see below) |
+
+## Watchlist proxy
+
+Letterboxd and Goodreads serve public RSS but send no CORS headers, so the
+browser can't read them directly. The app proxies those requests. Public
+proxies are unreliable (most are now dead or paid), so run your own — it's
+~60 lines and free. One allowlisted, CORS-adding fetcher
+(`worker/proxy-core.ts`) wrapped for three runtimes:
+
+- **Cloudflare Pages Function** (`functions/proxy.ts`) — deploys with the site
+  on Cloudflare Pages, same origin, zero extra setup. Set `VITE_PROXY_URL=/proxy`.
+- **Cloudflare Worker** (`worker/`) — `cd worker && npx wrangler deploy`, or
+  paste into the dashboard editor. Set `VITE_PROXY_URL` to the `*.workers.dev` URL.
+- **VPS / Node** (`server/proxy-node.ts`) — `node server/proxy-node.ts` behind
+  nginx + systemd. Set `VITE_PROXY_URL` to the public URL.
+
+`VITE_PROXY_URL` is baked at build time — rebuild after changing it. CSV import
+needs no proxy. Full guide: [`docs/proxy.md`](docs/proxy.md).
